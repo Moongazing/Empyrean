@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.Kernel.Empyrean.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.Kernel.Empyrean.Mailing", "kernel\Moongazing.Kernel.Empyrean.Mailing\Moongazing.Kernel.Empyrean.Mailing.csproj", "{228BD80F-3A5B-405D-8EEB-E9739EDBF342}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.Kernel.EmpyreanPersistence", "kernel\Moongazing.Kernel.Empyrean.Persistence\Moongazing.Kernel.EmpyreanPersistence.csproj", "{E3512669-7BFF-4755-969C-0C60382EE163}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.Kernel.Empyrean.Persistence", "kernel\Moongazing.Kernel.Empyrean.Persistence\Moongazing.Kernel.Empyrean.Persistence.csproj", "{E3512669-7BFF-4755-969C-0C60382EE163}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.Empyrean.Application", "src\Moongazing.Empyrean.Application\Moongazing.Empyrean.Application.csproj", "{CE93EFD0-7E0C-4277-AF63-697D374C1B14}"
 EndProject
