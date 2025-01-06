@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.Kernel.EmpyreanP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.Empyrean.Application", "src\Moongazing.Empyrean.Application\Moongazing.Empyrean.Application.csproj", "{CE93EFD0-7E0C-4277-AF63-697D374C1B14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.Kernel.Empyrean.Security", "kernel\Moongazing.Kernel.Empyrean.Security\Moongazing.Kernel.Empyrean.Security.csproj", "{DC9C4437-46F4-4B34-9FEF-6B0D0D7074E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{CE93EFD0-7E0C-4277-AF63-697D374C1B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE93EFD0-7E0C-4277-AF63-697D374C1B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE93EFD0-7E0C-4277-AF63-697D374C1B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC9C4437-46F4-4B34-9FEF-6B0D0D7074E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC9C4437-46F4-4B34-9FEF-6B0D0D7074E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC9C4437-46F4-4B34-9FEF-6B0D0D7074E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC9C4437-46F4-4B34-9FEF-6B0D0D7074E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +94,6 @@ Global
 		{228BD80F-3A5B-405D-8EEB-E9739EDBF342} = {B3CBFCA5-AEA8-49A5-954D-D4093FACF479}
 		{E3512669-7BFF-4755-969C-0C60382EE163} = {B3CBFCA5-AEA8-49A5-954D-D4093FACF479}
 		{CE93EFD0-7E0C-4277-AF63-697D374C1B14} = {8E753C62-73E0-4924-973A-CB09000617DF}
+		{DC9C4437-46F4-4B34-9FEF-6B0D0D7074E4} = {B3CBFCA5-AEA8-49A5-954D-D4093FACF479}
 	EndGlobalSection
 EndGlobal
