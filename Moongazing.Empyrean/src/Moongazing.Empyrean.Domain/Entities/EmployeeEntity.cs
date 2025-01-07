@@ -10,6 +10,7 @@ public class EmployeeEntity : Entity<Guid>
     public string LastName { get; set; } = default!;
     public string Email { get; set; } = default!;
     public string PhoneNumber { get; set; } = default!;
+    public DateTime DateOfBirth { get; set; }
     public string Address { get; set; } = default!;
     public string ProfilePictureUrl { get; set; } = default!;
     public EmployeeStatus Status { get; set; }
@@ -23,8 +24,10 @@ public class EmployeeEntity : Entity<Guid>
     public decimal NetSalary { get; set; }
     public decimal TaxAmount { get; set; }
     public decimal Bonus { get; set; }
+
+
     public virtual TerminationEntity? TerminationDetails { get; set; }
-    public virtual BankDetailsEntity BankDetails { get; set; } = default!;
+    public virtual BankDetailEntity BankDetail { get; set; } = default!;
     public virtual BranchEntity Branch { get; set; } = default!;
     public virtual EmployeeEntity? Manager { get; set; }
     public virtual ProfessionEntity Profession { get; set; } = default!;
@@ -50,6 +53,3 @@ public class EmployeeEntity : Entity<Guid>
     }
 
 }
-
-
-
