@@ -14,6 +14,7 @@ public class EmployeeEntity : Entity<Guid>
     public string Address { get; set; } = default!;
     public string ProfilePictureUrl { get; set; } = default!;
     public EmployeeStatus Status { get; set; }
+    public DateTime HireDate { get; set; }
     public Guid DepartmentId { get; set; }
     public Guid ProfessionId { get; set; }
     public Guid ManagerId { get; set; }
