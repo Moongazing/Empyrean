@@ -7,8 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.Application\Moongazing.Kernel.Application.csproj" />
+    <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.CrossCuttingConcerns\Moongazing.Kernel.CrossCuttingConcerns.csproj" />
+    <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.Localization\Moongazing.Kernel.Localization.csproj" />
+    <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.Mailing\Moongazing.Kernel.Mailing.csproj" />
     <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.Persistence\Moongazing.Kernel.Persistence.csproj" />
+    <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.Security\Moongazing.Kernel.Security.csproj" />
     <ProjectReference Include="..\Moongazing.Empyrean.Domain\Moongazing.Empyrean.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
   </ItemGroup>
 
 </Project>

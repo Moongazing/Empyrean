@@ -1,33 +1,33 @@
-﻿using Microsoft.Extensions.Configuration;
-using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
+﻿using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
 using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.Messages;
 using Serilog;
 using Serilog.Sinks.MSSqlServer;
 
-
 namespace Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.Logger;
 
-//https://github.com/serilog-mssql/serilog-sinks-mssqlserver
 public class MsSqlLogger : LoggerServiceBase
 {
-    public MsSqlLogger(IConfiguration configuration)
+    public MsSqlLogger(MsSqlConfiguration logConfiguration) : base(logger: null!)
     {
-        MsSqlConfiguration logConfiguration =
-            configuration.GetSection("SeriLogConfigurations:MsSqlConfiguration").Get<MsSqlConfiguration>()
-            ?? throw new Exception(SerilogMessages.NullOptionsMessage);
+        if (logConfiguration == null)
+        {
+            throw new Exception(SerilogMessages.NullOptionsMessage);
+        }
 
         MSSqlServerSinkOptions sinkOptions = new()
         {
             TableName = logConfiguration.TableName,
-            AutoCreateSqlDatabase = logConfiguration.AutoCreateSqlTable
+            AutoCreateSqlTable = logConfiguration.AutoCreateSqlTable
         };
 
         ColumnOptions columnOptions = new();
 
-        global::Serilog.Core.Logger seriLogConfig = new LoggerConfiguration().WriteTo
-            .MSSqlServer(logConfiguration.ConnectionString, sinkOptions, columnOptions: columnOptions)
+        Logger = new LoggerConfiguration()
+            .WriteTo.MSSqlServer(
+                connectionString: logConfiguration.ConnectionString,
+                sinkOptions: sinkOptions,
+                columnOptions: columnOptions
+            )
             .CreateLogger();
-
-        Logger = seriLogConfig;
     }
 }
