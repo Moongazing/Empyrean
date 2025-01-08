@@ -25,8 +25,7 @@ public class EmployeeEntity : Entity<Guid>
     public decimal NetSalary { get; set; }
     public decimal TaxAmount { get; set; }
     public decimal Bonus { get; set; }
-
-
+    
     public virtual TerminationEntity? TerminationDetails { get; set; }
     public virtual BankDetailEntity BankDetail { get; set; } = default!;
     public virtual BranchEntity Branch { get; set; } = default!;
