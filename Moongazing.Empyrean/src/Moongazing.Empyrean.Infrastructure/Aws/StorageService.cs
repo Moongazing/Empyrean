@@ -106,4 +106,91 @@ public class StorageService : IStorageService
     }
 
 
+    public async Task<List<string>> GetFilesByCategoryAsync(string category)
+    {
+        var prefix = $"{category}/"; 
+        var result = new List<string>();
+
+        var request = new ListObjectsV2Request
+        {
+            BucketName = awsS3Settings.BucketName,
+            Prefix = prefix 
+        };
+
+        ListObjectsV2Response response;
+        do
+        {
+            response = await s3Client.ListObjectsV2Async(request).ConfigureAwait(false);
+
+            foreach (var obj in response.S3Objects)
+            {
+                result.Add(GenerateFileUrl(obj.Key)); 
+            }
+
+            request.ContinuationToken = response.NextContinuationToken;
+        } while (response.IsTruncated); 
+
+        return result;
+    }
+
+
+    public async Task<byte[]> GetFileByIdAsync(string fileId)
+    {
+        
+        var prefix = $"{fileId}";
+
+        var request = new ListObjectsV2Request
+        {
+            BucketName = awsS3Settings.BucketName,
+            Prefix = prefix 
+        };
+
+        var response = await s3Client.ListObjectsV2Async(request).ConfigureAwait(false);
+
+        if (response.S3Objects.Count == 0)
+        {
+            throw new Exception("File not found.");
+        }
+
+        var key = response.S3Objects.First().Key;
+
+        var getObjectRequest = new GetObjectRequest
+        {
+            BucketName = awsS3Settings.BucketName,
+            Key = key
+        };
+
+        using var getObjectResponse = await s3Client.GetObjectAsync(getObjectRequest).ConfigureAwait(false);
+        using var memoryStream = new MemoryStream();
+        await getObjectResponse.ResponseStream.CopyToAsync(memoryStream);
+
+        return memoryStream.ToArray(); 
+    }
+    public async Task<List<string>> GetFilesByUserIdAsync(Guid userId)
+    {
+        var prefix = $"{userId}/"; 
+        var result = new List<string>();
+
+        var request = new ListObjectsV2Request
+        {
+            BucketName = awsS3Settings.BucketName,
+            Prefix = prefix 
+        };
+
+        ListObjectsV2Response response;
+        do
+        {
+            response = await s3Client.ListObjectsV2Async(request).ConfigureAwait(false);
+
+            foreach (var obj in response.S3Objects)
+            {
+                result.Add(GenerateFileUrl(obj.Key)); 
+            }
+
+            request.ContinuationToken = response.NextContinuationToken;
+        } while (response.IsTruncated); 
+
+        return result;
+    }
+
 }

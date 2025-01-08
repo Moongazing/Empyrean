@@ -8,4 +8,7 @@ public interface IStorageService
     string ExtractFileKeyFromUrl(string url);
     Task<bool> DeleteFileAsync(string key);
     Task<string> UpdateFileAsync(string key, byte[] fileData, string category, Guid userId);
+    Task<byte[]> GetFileByIdAsync(string fileId);
+    Task<List<string>> GetFilesByCategoryAsync(string category);
+    Task<List<string>> GetFilesByUserIdAsync(Guid userId);
 }
