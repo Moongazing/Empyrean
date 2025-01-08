@@ -108,13 +108,13 @@ public class StorageService : IStorageService
 
     public async Task<List<string>> GetFilesByCategoryAsync(string category)
     {
-        var prefix = $"{category}/"; 
+        var prefix = $"{category}/";
         var result = new List<string>();
 
         var request = new ListObjectsV2Request
         {
             BucketName = awsS3Settings.BucketName,
-            Prefix = prefix 
+            Prefix = prefix
         };
 
         ListObjectsV2Response response;
@@ -124,11 +124,11 @@ public class StorageService : IStorageService
 
             foreach (var obj in response.S3Objects)
             {
-                result.Add(GenerateFileUrl(obj.Key)); 
+                result.Add(GenerateFileUrl(obj.Key));
             }
 
             request.ContinuationToken = response.NextContinuationToken;
-        } while (response.IsTruncated); 
+        } while (response.IsTruncated);
 
         return result;
     }
@@ -136,13 +136,13 @@ public class StorageService : IStorageService
 
     public async Task<byte[]> GetFileByIdAsync(string fileId)
     {
-        
+
         var prefix = $"{fileId}";
 
         var request = new ListObjectsV2Request
         {
             BucketName = awsS3Settings.BucketName,
-            Prefix = prefix 
+            Prefix = prefix
         };
 
         var response = await s3Client.ListObjectsV2Async(request).ConfigureAwait(false);
@@ -164,17 +164,17 @@ public class StorageService : IStorageService
         using var memoryStream = new MemoryStream();
         await getObjectResponse.ResponseStream.CopyToAsync(memoryStream);
 
-        return memoryStream.ToArray(); 
+        return memoryStream.ToArray();
     }
     public async Task<List<string>> GetFilesByUserIdAsync(Guid userId)
     {
-        var prefix = $"{userId}/"; 
+        var prefix = $"{userId}/";
         var result = new List<string>();
 
         var request = new ListObjectsV2Request
         {
             BucketName = awsS3Settings.BucketName,
-            Prefix = prefix 
+            Prefix = prefix
         };
 
         ListObjectsV2Response response;
@@ -184,11 +184,11 @@ public class StorageService : IStorageService
 
             foreach (var obj in response.S3Objects)
             {
-                result.Add(GenerateFileUrl(obj.Key)); 
+                result.Add(GenerateFileUrl(obj.Key));
             }
 
             request.ContinuationToken = response.NextContinuationToken;
-        } while (response.IsTruncated); 
+        } while (response.IsTruncated);
 
         return result;
     }

@@ -1,5 +1,9 @@
-﻿using FluentValidation;
+﻿using Doing.Retail.Application.Services.AuthenticatorService;
+using Doing.Retail.Application.Services.Cache;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Moongazing.Empyrean.Application.Services.Auth;
+using Moongazing.Empyrean.Application.Services.AuthenticatorService;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
 using Moongazing.Kernel.Application.Pipelines.Caching;
 using Moongazing.Kernel.Application.Pipelines.CircuitBreaker;
@@ -51,6 +55,11 @@ public static class ApplicationServiceRegistration
         services.AddSingleton<ILogger, PostgreSqlLogger>(_ => new PostgreSqlLogger(postgreSqlConfig));
 
         services.AddYamlResourceLocalization();
+
+
+        services.AddSingleton<IAuthService, AuthService>();
+        services.AddSingleton<IAuthenticatorService, AuthenticatorService>();
+        services.AddSingleton<ICacheService, CacheService>();
 
 
         return services;

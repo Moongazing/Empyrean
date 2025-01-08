@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.CrossCuttingConcerns\Moongazing.Kernel.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.Localization\Moongazing.Kernel.Localization.csproj" />
     <ProjectReference Include="..\Moongazing.Empyrean.Application\Moongazing.Empyrean.Application.csproj" />

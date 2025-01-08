@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Moongazing.Empyrean.Application;
+using Moongazing.Empyrean.Infrastructure;
 using Moongazing.Empyrean.Persistence;
 using Moongazing.Empyrean.WebApi;
 using Moongazing.Kernel.CrossCuttingConcerns.Exceptions.Extensions;
@@ -12,7 +13,6 @@ using Moongazing.Kernel.Security.Jwt;
 using Polly;
 using StackExchange.Redis;
 using System.Text.Json.Serialization;
-using Moongazing.Empyrean.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
