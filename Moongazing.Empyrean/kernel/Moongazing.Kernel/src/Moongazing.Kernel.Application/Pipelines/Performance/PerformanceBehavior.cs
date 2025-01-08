@@ -51,7 +51,7 @@ public class PerformanceBehavior<TRequest, TResponse> : IPipelineBehavior<TReque
                     User = "PerformanceCheck"
                 };
 
-                loggerServiceBase.Info($"{message} | Details: {JsonSerializer.Serialize(logDetail)}");
+                loggerServiceBase.Information($"{message} | Details: {JsonSerializer.Serialize(logDetail)}");
             }
 
             stopwatch.Reset();

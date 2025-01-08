@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
 using Moongazing.Kernel.Application.Pipelines.Caching;
 using Moongazing.Kernel.Application.Pipelines.CircuitBreaker;
@@ -11,12 +10,11 @@ using Moongazing.Kernel.Application.Pipelines.Validation;
 using Moongazing.Kernel.Application.Rules;
 using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
 using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.Logger;
+using Moongazing.Kernel.Localization;
 using Moongazing.Kernel.Mailing;
 using Moongazing.Kernel.Mailing.MailKitImplementations;
 using Moongazing.Kernel.Security.Jwt;
 using System.Reflection;
-using Moongazing.Kernel.Localization;
-using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog;
 using ILogger = Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ILogger;
 
 
@@ -61,7 +59,7 @@ public static class ApplicationServiceRegistration
     public static IServiceCollection AddSubClassesOfType(this IServiceCollection services,
                                                          Assembly assembly,
                                                          Type type,
-                                                         Func<IServiceCollection, Type, IServiceCollection>?                                        addWithLifeCycle = null)
+                                                         Func<IServiceCollection, Type, IServiceCollection>? addWithLifeCycle = null)
     {
         var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
         foreach (Type? item in types)

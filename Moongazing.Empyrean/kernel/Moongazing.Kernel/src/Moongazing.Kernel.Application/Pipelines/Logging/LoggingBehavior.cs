@@ -36,7 +36,7 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
             User = httpContextAccessor.HttpContext?.User.Identity?.Name ?? "?"
         };
 
-        loggerServiceBase.Info(JsonSerializer.Serialize(logDetail));
+        loggerServiceBase.Information(JsonSerializer.Serialize(logDetail));
         return await next();
     }
 }

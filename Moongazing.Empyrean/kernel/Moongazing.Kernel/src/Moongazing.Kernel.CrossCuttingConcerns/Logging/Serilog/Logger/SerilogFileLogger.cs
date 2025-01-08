@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
-using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.Messages;
+﻿using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
 using Serilog;
 
 namespace Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.Logger;
