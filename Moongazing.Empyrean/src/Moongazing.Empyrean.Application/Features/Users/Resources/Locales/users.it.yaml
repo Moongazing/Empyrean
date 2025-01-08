@@ -1,0 +1,4 @@
+  USER_NOT_FOUND: "Utente non trovato."
+  PASSWORD_MISMATCH: "La password non corrisponde."
+  EMAIL_ALREADY_EXISTS: "L'email esiste già."
+  USER_ALREADY_EXISTS: "L'utente esiste già."

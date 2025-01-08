@@ -1,5 +1,4 @@
-﻿using Doing.Retail.Application.Services.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Moongazing.Empyrean.Application.Repositories;
 using Moongazing.Empyrean.Persistence.Contexts;
 using Moongazing.Kernel.Persistence.Repositories.Base;

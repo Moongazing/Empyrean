@@ -1,5 +1,9 @@
-﻿using FluentValidation;
+﻿using Doing.Retail.Application.Services.AuthenticatorService;
+using Doing.Retail.Application.Services.Cache;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Moongazing.Empyrean.Application.Services.Auth;
+using Moongazing.Empyrean.Application.Services.AuthenticatorService;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
 using Moongazing.Kernel.Application.Pipelines.Caching;
 using Moongazing.Kernel.Application.Pipelines.CircuitBreaker;
@@ -13,18 +17,22 @@ using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.Logger;
 using Moongazing.Kernel.Localization;
 using Moongazing.Kernel.Mailing;
 using Moongazing.Kernel.Mailing.MailKitImplementations;
+using Moongazing.Kernel.Security.EmailAuthenticator;
 using Moongazing.Kernel.Security.Jwt;
+using Moongazing.Kernel.Security.OtpAuthenticator.OtpNet;
+using Moongazing.Kernel.Security.OtpAuthenticator;
 using System.Reflection;
 using ILogger = Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ILogger;
+using Doing.Retail.Application.Services.User;
 
 
-namespace Application;
+namespace Moongazing.Empyrean.Application;
 
 public static class ApplicationServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services,
                                                             MailSettings mailSettings,
-                                                            FileLogConfiguration fileLogConfiguration,
+                                                            PostgreSqlConfiguration postgreSqlConfig,
                                                             TokenOptions tokenOptions)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -48,9 +56,17 @@ public static class ApplicationServiceRegistration
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddSingleton<IMailService, MailKitMailService>(_ => new MailKitMailService(mailSettings));
-        services.AddSingleton<ILogger, SeriLogFileLogger>(_ => new SeriLogFileLogger(fileLogConfiguration));
+        services.AddSingleton<ILogger, PostgreSqlLogger>(_ => new PostgreSqlLogger(postgreSqlConfig));
 
         services.AddYamlResourceLocalization();
+
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IAuthenticatorService, AuthenticatorService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ICacheService, CacheService>();
+        services.AddScoped<ITokenHelper, JwtHelper>();
+        services.AddScoped<IEmailAuthenticatorHelper, EmailAuthenticatorHelper>();
+        services.AddScoped<IOtpAuthenticatorHelper, OtpNetOtpAuthenticatorHelper>();
 
 
         return services;
