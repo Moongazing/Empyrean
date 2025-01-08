@@ -2,9 +2,9 @@
 
 public enum AttendanceStatus
 {
-    Present = 1,
-    Absent = 2,
-    Late = 3,
-    OnLeave = 4,
-    NotCheckedIn = 5
+    Present = 0,
+    Absent = 1,
+    Late = 2,
+    OnLeave = 3,
+    NotCheckedIn = 4
 }

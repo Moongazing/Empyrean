@@ -8,7 +8,7 @@ public class TerminationEntity:Entity<Guid>
     public string Reason { get; set; } = default!; 
     public DateTime TerminationDate { get; set; } 
     public string Comments { get; set; } = default!; 
-    public bool IsVoluntary { get; set; }
+    public bool IsVoluntary { get; set; } 
     public virtual EmployeeEntity Employee { get; set; } = default!;
 
     public TerminationEntity()

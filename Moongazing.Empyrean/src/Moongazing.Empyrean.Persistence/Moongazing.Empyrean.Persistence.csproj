@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\kernel\Moongazing.Kernel\src\Moongazing.Kernel.Security\Moongazing.Kernel.Security.csproj" />
+    <ProjectReference Include="..\Moongazing.Empyrean.Application\Moongazing.Empyrean.Application.csproj" />
     <ProjectReference Include="..\Moongazing.Empyrean.Domain\Moongazing.Empyrean.Domain.csproj" />
   </ItemGroup>
 
