@@ -17,9 +17,13 @@ using Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.Logger;
 using Moongazing.Kernel.Localization;
 using Moongazing.Kernel.Mailing;
 using Moongazing.Kernel.Mailing.MailKitImplementations;
+using Moongazing.Kernel.Security.EmailAuthenticator;
 using Moongazing.Kernel.Security.Jwt;
+using Moongazing.Kernel.Security.OtpAuthenticator.OtpNet;
+using Moongazing.Kernel.Security.OtpAuthenticator;
 using System.Reflection;
 using ILogger = Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ILogger;
+using Doing.Retail.Application.Services.User;
 
 
 namespace Moongazing.Empyrean.Application;
@@ -56,10 +60,13 @@ public static class ApplicationServiceRegistration
 
         services.AddYamlResourceLocalization();
 
-
-        services.AddSingleton<IAuthService, AuthService>();
-        services.AddSingleton<IAuthenticatorService, AuthenticatorService>();
-        services.AddSingleton<ICacheService, CacheService>();
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IAuthenticatorService, AuthenticatorService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ICacheService, CacheService>();
+        services.AddScoped<ITokenHelper, JwtHelper>();
+        services.AddScoped<IEmailAuthenticatorHelper, EmailAuthenticatorHelper>();
+        services.AddScoped<IOtpAuthenticatorHelper, OtpNetOtpAuthenticatorHelper>();
 
 
         return services;
