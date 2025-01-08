@@ -24,7 +24,7 @@ public static class ApplicationServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services,
                                                             MailSettings mailSettings,
-                                                            FileLogConfiguration fileLogConfiguration,
+                                                            PostgreSqlConfiguration postgreSqlConfig,
                                                             TokenOptions tokenOptions)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -48,7 +48,7 @@ public static class ApplicationServiceRegistration
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddSingleton<IMailService, MailKitMailService>(_ => new MailKitMailService(mailSettings));
-        services.AddSingleton<ILogger, SeriLogFileLogger>(_ => new SeriLogFileLogger(fileLogConfiguration));
+        services.AddSingleton<ILogger, PostgreSqlLogger>(_ => new PostgreSqlLogger(postgreSqlConfig));
 
         services.AddYamlResourceLocalization();
 

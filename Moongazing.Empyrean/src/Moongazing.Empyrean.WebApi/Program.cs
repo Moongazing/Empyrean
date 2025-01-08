@@ -12,18 +12,19 @@ using Moongazing.Kernel.Security.Jwt;
 using Polly;
 using StackExchange.Redis;
 using System.Text.Json.Serialization;
+using Moongazing.Empyrean.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region Configuration and Services Setup
 
 builder.Services.AddApplicationServices(
-    fileLogConfiguration: builder.Configuration.GetSection("FileLog").Get<FileLogConfiguration>()!,
+    postgreSqlConfig: builder.Configuration.GetSection("SeriLogConfigurations:PostgresqlConfiguration").Get<PostgreSqlConfiguration>()!,
     tokenOptions: builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>()!,
-    mailSettings: builder.Configuration.GetSection("MailSettings").Get<MailSettings>()!
-);
+    mailSettings: builder.Configuration.GetSection("MailSettings").Get<MailSettings>()!);
 
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();
 
