@@ -1,0 +1,9 @@
+using Moongazing.Kernel.Application.Responses;
+
+namespace Doing.Retail.Application.Features.OperationClaims.Queries.GetById;
+
+public class GetByIdOperationClaimResponse : IResponse
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = default!;
+}
