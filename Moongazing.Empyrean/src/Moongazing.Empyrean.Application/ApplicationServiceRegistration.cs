@@ -18,7 +18,7 @@ using System.Reflection;
 using ILogger = Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ILogger;
 
 
-namespace Application;
+namespace Moongazing.Empyrean.Application;
 
 public static class ApplicationServiceRegistration
 {
