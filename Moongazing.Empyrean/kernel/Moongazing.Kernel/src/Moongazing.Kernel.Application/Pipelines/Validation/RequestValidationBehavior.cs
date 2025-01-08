@@ -1,6 +1,6 @@
-﻿using Moongazing.Kernel.CrossCuttingConcerns.Exceptions.Types;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
+using Moongazing.Kernel.CrossCuttingConcerns.Exceptions.Types;
 using ValidationException = Moongazing.Kernel.CrossCuttingConcerns.Exceptions.Types.ValidationException;
 
 namespace Moongazing.Kernel.Application.Pipelines.Validation;
