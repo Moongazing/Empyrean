@@ -1,9 +1,10 @@
 ﻿using Doing.Retail.Application.Services.AuthenticatorService;
-using Doing.Retail.Application.Services.Cache;
+using Doing.Retail.Application.Services.User;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Moongazing.Empyrean.Application.Services.Auth;
 using Moongazing.Empyrean.Application.Services.AuthenticatorService;
+using Moongazing.Empyrean.Application.Services.Cache;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
 using Moongazing.Kernel.Application.Pipelines.Caching;
 using Moongazing.Kernel.Application.Pipelines.CircuitBreaker;
@@ -19,11 +20,10 @@ using Moongazing.Kernel.Mailing;
 using Moongazing.Kernel.Mailing.MailKitImplementations;
 using Moongazing.Kernel.Security.EmailAuthenticator;
 using Moongazing.Kernel.Security.Jwt;
-using Moongazing.Kernel.Security.OtpAuthenticator.OtpNet;
 using Moongazing.Kernel.Security.OtpAuthenticator;
+using Moongazing.Kernel.Security.OtpAuthenticator.OtpNet;
 using System.Reflection;
 using ILogger = Moongazing.Kernel.CrossCuttingConcerns.Logging.Serilog.ILogger;
-using Doing.Retail.Application.Services.User;
 
 
 namespace Moongazing.Empyrean.Application;

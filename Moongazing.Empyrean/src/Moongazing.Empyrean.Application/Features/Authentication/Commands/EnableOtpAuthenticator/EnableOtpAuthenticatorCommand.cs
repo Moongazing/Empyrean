@@ -1,5 +1,4 @@
-﻿using Doing.Retail.Application.Features.Authentication.Commands.EnableOtpAuthenticator;
-using Doing.Retail.Application.Features.Authentication.Rules;
+﻿using Doing.Retail.Application.Features.Authentication.Rules;
 using Doing.Retail.Application.Services.User;
 using MediatR;
 using Moongazing.Empyrean.Application.Repositories;
@@ -43,9 +42,8 @@ public class EnableOtpAuthenticatorCommand : IRequest<EnableOtpAuthenticatorResp
             await authBusinessRules.UserShouldBeExistsWhenSelected(user);
             await authBusinessRules.UserShouldNotBeHaveAuthenticator(user!);
 
-            OtpAuthenticatorEntity? doesExistOtpAuthenticator = await otpAuthenticatorRepository.GetAsync(
-                predicate: o => o.UserId == request.UserId,
-                cancellationToken: cancellationToken);
+            OtpAuthenticatorEntity? doesExistOtpAuthenticator = await otpAuthenticatorRepository.GetAsync(predicate: o => o.UserId == request.UserId,
+                                                                                                          cancellationToken: cancellationToken);
 
             await authBusinessRules.OtpAuthenticatorThatVerifiedShouldNotBeExists(doesExistOtpAuthenticator);
 
@@ -56,9 +54,8 @@ public class EnableOtpAuthenticatorCommand : IRequest<EnableOtpAuthenticatorResp
 
             OtpAuthenticatorEntity newOtpAuthenticator = await authenticatorService.CreateOtpAuthenticator(user!);
 
-            OtpAuthenticatorEntity addedOtpAuthenticator = await otpAuthenticatorRepository.AddAsync(
-                newOtpAuthenticator,
-                cancellationToken);
+            OtpAuthenticatorEntity addedOtpAuthenticator = await otpAuthenticatorRepository.AddAsync(newOtpAuthenticator,
+                                                                                                     cancellationToken);
 
             EnableOtpAuthenticatorResponse enabledOtpAuthenticatorDto = new()
             {

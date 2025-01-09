@@ -1,4 +1,4 @@
-﻿namespace Doing.Retail.Application.Services.Cache;
+﻿namespace Moongazing.Empyrean.Application.Services.Cache;
 
 public interface ICacheService
 {

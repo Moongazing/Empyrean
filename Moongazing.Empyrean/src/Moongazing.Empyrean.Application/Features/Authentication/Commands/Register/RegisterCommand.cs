@@ -1,6 +1,5 @@
 ﻿using Doing.Retail.Application.Features.Authentication.Rules;
 using MediatR;
-using Moongazing.Empyrean.Application.Features.Authentication.Commands.Register;
 using Moongazing.Empyrean.Application.Repositories;
 using Moongazing.Empyrean.Application.Services.Auth;
 using Moongazing.Kernel.Application.Dtos;
@@ -12,10 +11,9 @@ using Moongazing.Kernel.Security.Jwt;
 using Moongazing.Kernel.Security.Models;
 using Moongazing.Kernel.Security.Models.Enums;
 
-namespace Doing.Retail.Application.Features.Authentication.Commands.Register;
+namespace Moongazing.Empyrean.Application.Features.Authentication.Commands.Register;
 
-public class RegisterCommand : IRequest<RegisterResponse>,
-    ILoggableRequest, ITransactionalRequest, IIntervalRequest
+public class RegisterCommand : IRequest<RegisterResponse>, ILoggableRequest, ITransactionalRequest, IIntervalRequest
 {
     public UserRegisterDto UserRegisterDto { get; set; } = default!;
     public string IpAddress { get; set; } = default!;
@@ -46,8 +44,8 @@ public class RegisterCommand : IRequest<RegisterResponse>,
                                                                                 request.UserRegisterDto.RepeatPassword);
 
             HashingHelper.CreateHash(request.UserRegisterDto.Password,
-                                             inputHash: out byte[] passwordHash,
-                                             inputSalt: out byte[] passwordSalt);
+                                     inputHash: out byte[] passwordHash,
+                                     inputSalt: out byte[] passwordSalt);
 
             UserEntity newUser = new()
             {
@@ -64,6 +62,7 @@ public class RegisterCommand : IRequest<RegisterResponse>,
 
             RefreshTokenEntity createdRefreshToken = await authService.CreateRefreshToken(createdUser,
                                                                                           request.IpAddress);
+
             RefreshTokenEntity addedRefreshToken = await authService.AddRefreshToken(createdRefreshToken);
 
             RegisterResponse registeredResponse = new()

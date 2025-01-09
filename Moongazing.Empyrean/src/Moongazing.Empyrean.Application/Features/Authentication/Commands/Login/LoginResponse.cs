@@ -11,10 +11,7 @@ public class LoginResponse : IResponse
     public RefreshTokenEntity? RefreshToken { get; set; }
     public AuthenticatorType? RequiredAuthenticatorType { get; set; }
 
-    public LogginHttpResponse ToHttpResponse()
-    {
-        return new() { AccessToken = AccessToken, RequiredAuthenticatorType = RequiredAuthenticatorType };
-    }
+    public LogginHttpResponse ToHttpResponse() => new() { AccessToken = AccessToken, RequiredAuthenticatorType = RequiredAuthenticatorType };
 
     public class LogginHttpResponse
     {
