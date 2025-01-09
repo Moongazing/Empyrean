@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Doing.Retail.Application.Features.Users.Rules;
 using MediatR;
+using Moongazing.Empyrean.Application.Features.BankDetails.Constants;
 using Moongazing.Empyrean.Application.Features.Users.Constans;
 using Moongazing.Empyrean.Application.Repositories;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
