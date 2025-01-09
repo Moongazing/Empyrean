@@ -23,4 +23,14 @@
     <PackageReference Include="StackExchange.Redis" Version="2.7.27" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\BankDetails\Commands\Delete\" />
+    <Folder Include="Features\BankDetails\Commands\Update\" />
+    <Folder Include="Features\BankDetails\Profiles\" />
+    <Folder Include="Features\BankDetails\Queries\" />
+    <Folder Include="Features\Employee\Commands\" />
+    <Folder Include="Features\Employee\Resources\" />
+    <Folder Include="Features\Employee\Profiles\" />
+  </ItemGroup>
+
 </Project>
