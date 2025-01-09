@@ -2,8 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Moongazing.Empyrean.Domain.Entities;
+using Moongazing.Kernel.Persistence.Repositories.Common;
+using Moongazing.Kernel.Security.Extensions;
 using Moongazing.Kernel.Security.Models;
 using System.Reflection;
+using System.Security.Principal;
 
 namespace Moongazing.Empyrean.Persistence.Contexts;
 
@@ -42,6 +45,42 @@ public class BaseDbContext : DbContext
     {
         HttpContextAccessor = httpContextAccessor;
         Configuration = configuration;
+    }
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        ParseAudit();
+
+        return await base.SaveChangesAsync(cancellationToken);
+
+    }
+    protected Guid RetrieveUserId()
+    {
+        var userId = Guid.Parse(HttpContextAccessor.HttpContext.User.GetIdClaim()!);
+        return userId;
+    }
+    private void ParseAudit()
+    {
+        var currentUserId = RetrieveUserId();
+        var entries = ChangeTracker.Entries<Entity<Guid>>()
+                                   .Where(e => e.State == EntityState.Added ||
+                                          e.State == EntityState.Modified ||
+                                          e.State == EntityState.Deleted);
+
+        foreach (var entry in entries)
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.CreatedBy = currentUserId;
+            }
+            else if (entry.State == EntityState.Modified)
+            {
+                entry.Entity.UpdatedBy = currentUserId;
+            }
+            else
+            {
+                entry.Entity.DeletedBy = currentUserId;
+            }
+        }
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
