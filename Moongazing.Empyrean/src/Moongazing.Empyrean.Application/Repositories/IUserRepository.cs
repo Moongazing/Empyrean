@@ -7,3 +7,4 @@ public interface IUserRepository : IAsyncRepository<UserEntity, Guid>, IReposito
 {
 
 }
+
