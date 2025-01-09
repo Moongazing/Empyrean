@@ -11,10 +11,10 @@ public class ExceptionMiddleware
 {
     private readonly IHttpContextAccessor contextAccessor;
     private readonly HttpExceptionHandler httpExceptionHandler = new();
-    private readonly LoggerServiceBase loggerService;
+    private readonly ILogger loggerService;
     private readonly RequestDelegate next;
 
-    public ExceptionMiddleware(RequestDelegate next, IHttpContextAccessor contextAccessor, LoggerServiceBase loggerService)
+    public ExceptionMiddleware(RequestDelegate next, IHttpContextAccessor contextAccessor, ILogger loggerService)
     {
         this.contextAccessor = contextAccessor;
         this.loggerService = loggerService;

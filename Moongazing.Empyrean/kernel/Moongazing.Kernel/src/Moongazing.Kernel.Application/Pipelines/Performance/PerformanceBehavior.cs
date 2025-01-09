@@ -10,12 +10,12 @@ public class PerformanceBehavior<TRequest, TResponse> : IPipelineBehavior<TReque
     where TRequest : IRequest<TResponse>, IIntervalRequest
 {
     private readonly Stopwatch stopwatch;
-    private readonly LoggerServiceBase loggerServiceBase;
+    private readonly ILogger logger;
 
-    public PerformanceBehavior(Stopwatch stopwatch, LoggerServiceBase loggerServiceBase)
+    public PerformanceBehavior(Stopwatch stopwatch, ILogger logger)
     {
         this.stopwatch = stopwatch;
-        this.loggerServiceBase = loggerServiceBase;
+        this.logger = logger;
     }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
@@ -51,7 +51,7 @@ public class PerformanceBehavior<TRequest, TResponse> : IPipelineBehavior<TReque
                     User = "PerformanceCheck"
                 };
 
-                loggerServiceBase.Information($"{message} | Details: {JsonSerializer.Serialize(logDetail)}");
+                logger.Information($"{message} | Details: {JsonSerializer.Serialize(logDetail)}");
             }
 
             stopwatch.Reset();

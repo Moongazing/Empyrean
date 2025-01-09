@@ -15,4 +15,9 @@ public class LeaveRequestEntity : Entity<Guid>
 
     public virtual EmployeeEntity Employee { get; set; } = default!;
 
+    public LeaveRequestEntity()
+    {
+
+    }
+
 }

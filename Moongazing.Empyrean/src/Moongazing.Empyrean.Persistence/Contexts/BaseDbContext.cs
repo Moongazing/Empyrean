@@ -35,6 +35,7 @@ public class BaseDbContext : DbContext
     public virtual DbSet<PromotionEntity> Promotions { get; set; }
     public virtual DbSet<ShiftScheduleEntity> ShiftSchedules { get; set; }
     public virtual DbSet<TerminationEntity> Terminations { get; set; }
+    public virtual DbSet<PayrollEntity> Payrolls { get; set; }
 
 
     public BaseDbContext(DbContextOptions<BaseDbContext> options, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(options)

@@ -45,6 +45,8 @@ public class EmployeeEntity : Entity<Guid>
     public virtual ICollection<DisciplinaryActionEntity> DisciplinaryActions { get; set; } = new HashSet<DisciplinaryActionEntity>();
     public virtual ICollection<AwardEntity> Awards { get; set; } = new HashSet<AwardEntity>();
     public virtual ICollection<AttendanceEntity> Attendances { get; set; } = new HashSet<AttendanceEntity>();
+    public virtual ICollection<PayrollEntity> Payrolls { get; set; } = new HashSet<PayrollEntity>();
+
 
     public EmployeeEntity()
     {
