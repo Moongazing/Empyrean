@@ -13,7 +13,7 @@ public class TerminationEntityConfiguration : IEntityTypeConfiguration<Terminati
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.EmployeeId)
@@ -24,7 +24,7 @@ public class TerminationEntityConfiguration : IEntityTypeConfiguration<Terminati
                .IsRequired();
 
         builder.Property(e => e.TerminationDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.Comments)

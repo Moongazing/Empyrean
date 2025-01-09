@@ -13,7 +13,7 @@ public class AdvanceRequestEntityConfiguration : IEntityTypeConfiguration<Advanc
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.EmployeeId)
@@ -35,11 +35,11 @@ public class AdvanceRequestEntityConfiguration : IEntityTypeConfiguration<Advanc
                .IsRequired();
 
         builder.Property(e => e.RequestDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.ApprovalDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired(false);
 
         builder.HasOne(e => e.Employee)

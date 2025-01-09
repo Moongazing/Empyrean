@@ -13,7 +13,7 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.HasKey(u => u.Id);
 
         builder.Property(u => u.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(u => u.FirstName)

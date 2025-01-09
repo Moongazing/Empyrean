@@ -13,18 +13,18 @@ public class AttendanceEntityConfiguration : IEntityTypeConfiguration<Attendance
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.EmployeeId)
                .IsRequired();
 
         builder.Property(e => e.CheckInTime)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.CheckOutTime)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired(false);
 
         builder.Property(e => e.Status)

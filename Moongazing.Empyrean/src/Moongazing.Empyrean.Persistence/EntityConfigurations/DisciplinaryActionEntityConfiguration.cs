@@ -13,7 +13,7 @@ public class DisciplinaryActionEntityConfiguration : IEntityTypeConfiguration<Di
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.EmployeeId)
@@ -28,7 +28,7 @@ public class DisciplinaryActionEntityConfiguration : IEntityTypeConfiguration<Di
                .IsRequired();
 
         builder.Property(e => e.ActionDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.Comments)

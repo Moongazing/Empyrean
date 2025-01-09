@@ -18,7 +18,7 @@ public class DepartmentEntityConfiguration : IEntityTypeConfiguration<Department
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.Name)
@@ -34,6 +34,11 @@ public class DepartmentEntityConfiguration : IEntityTypeConfiguration<Department
                .WithOne(e => e.Department)
                .HasForeignKey(e => e.DepartmentId)
                .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(e => e.Employees)
+             .WithOne(e => e.Department)
+             .HasForeignKey(e => e.DepartmentId)
+             .OnDelete(DeleteBehavior.Cascade);
 
     }
 }
