@@ -10,12 +10,12 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
      where TRequest : IRequest<TResponse>, ILoggableRequest
 {
     private readonly IHttpContextAccessor httpContextAccessor;
-    private readonly LoggerServiceBase loggerServiceBase;
+    private readonly ILogger logger;
 
-    public LoggingBehavior(IHttpContextAccessor httpContextAccessor, LoggerServiceBase loggerServiceBase)
+    public LoggingBehavior(IHttpContextAccessor httpContextAccessor, ILogger logger)
     {
         this.httpContextAccessor = httpContextAccessor;
-        this.loggerServiceBase = loggerServiceBase;
+        this.logger = logger;
     }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
@@ -36,7 +36,7 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
             User = httpContextAccessor.HttpContext?.User.Identity?.Name ?? "?"
         };
 
-        loggerServiceBase.Information(JsonSerializer.Serialize(logDetail));
+        logger.Information(JsonSerializer.Serialize(logDetail));
         return await next();
     }
 }
