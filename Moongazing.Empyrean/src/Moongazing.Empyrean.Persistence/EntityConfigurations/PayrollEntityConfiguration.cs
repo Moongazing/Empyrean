@@ -13,14 +13,14 @@ public class PayrollEntityConfiguration : IEntityTypeConfiguration<PayrollEntity
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.EmployeeId)
                .IsRequired();
 
         builder.Property(e => e.PayDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.GrossSalary)
@@ -40,7 +40,7 @@ public class PayrollEntityConfiguration : IEntityTypeConfiguration<PayrollEntity
                .IsRequired();
 
         builder.HasOne(e => e.Employee)
-               .WithMany(e => e.Payrolls) // EmployeeEntity ile ilişkisi
+               .WithMany(e => e.Payrolls) 
                .HasForeignKey(e => e.EmployeeId)
                .OnDelete(DeleteBehavior.Cascade);
     }

@@ -24,7 +24,7 @@ public class RefreshTokenEntityConfiguration : IEntityTypeConfiguration<RefreshT
                .IsRequired();
 
         builder.Property(e => e.Expires)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.CreatedByIp)
@@ -32,7 +32,7 @@ public class RefreshTokenEntityConfiguration : IEntityTypeConfiguration<RefreshT
                .IsRequired();
 
         builder.Property(e => e.Revoked)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired(false);
 
         builder.Property(e => e.RevokedByIp)

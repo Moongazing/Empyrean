@@ -13,18 +13,18 @@ public class LeaveRequestEntityConfiguration : IEntityTypeConfiguration<LeaveReq
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.EmployeeId)
                .IsRequired();
 
         builder.Property(e => e.StartDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.EndDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.LeaveType)
@@ -39,7 +39,7 @@ public class LeaveRequestEntityConfiguration : IEntityTypeConfiguration<LeaveReq
                .IsRequired();
 
         builder.Property(e => e.RequestDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.ApprovedBy)

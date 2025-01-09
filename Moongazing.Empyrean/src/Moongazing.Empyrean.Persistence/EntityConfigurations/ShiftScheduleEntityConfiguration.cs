@@ -13,18 +13,18 @@ public class ShiftScheduleEntityConfiguration : IEntityTypeConfiguration<ShiftSc
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.EmployeeId)
                .IsRequired();
 
         builder.Property(e => e.ShiftStart)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.ShiftEnd)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.Notes)

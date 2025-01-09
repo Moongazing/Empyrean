@@ -13,7 +13,7 @@ public class ProfessionEntityConfiguration : IEntityTypeConfiguration<Profession
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.Name)

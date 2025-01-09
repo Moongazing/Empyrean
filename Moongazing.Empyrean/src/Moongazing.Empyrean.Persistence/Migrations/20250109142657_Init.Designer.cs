@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Moongazing.Empyrean.Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20250108162113_Init")]
+    [Migration("20250109142657_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -29,16 +29,23 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<DateTime?>("ApprovalDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<decimal>("ApprovedAmount")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -49,14 +56,18 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                     b.Property<bool>("IsApproved")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Reason")
-                        .HasColumnType("integer");
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("RequestDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<decimal>("RequestedAmount")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -65,23 +76,30 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("AdvanceRequests");
+                    b.ToTable("AdvanceRequests", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.AttendanceEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<DateTime>("CheckInTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("CheckOutTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -93,6 +111,9 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -100,33 +121,45 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendances", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.AwardEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<DateTime>("AwardDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("AwardName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -136,25 +169,34 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Awards");
+                    b.ToTable("Awards", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.BankDetailEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("AccountNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("BankName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -164,67 +206,88 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.Property<string>("IBAN")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
-
-                    b.ToTable("BankDetails");
+                    b.ToTable("BankDetails", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.BenefitEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("BenefitName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<decimal>("Value")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Benefits");
+                    b.ToTable("Benefits", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.BranchEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -234,11 +297,16 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -247,56 +315,77 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Branches");
+                    b.ToTable("Branches", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.DepartmentEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.DisciplinaryActionEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<DateTime>("ActionDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("ActionType")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Comments")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -306,7 +395,11 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.Property<string>("Reason")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -315,30 +408,46 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("DisciplinaryActions");
+                    b.ToTable("DisciplinaryActions", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.DocumentEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("DocumentName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("DocumentUrl")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -349,19 +458,28 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DocumentName");
+
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Documents");
+                    b.ToTable("Documents", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.EmergencyContactEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -371,15 +489,21 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)");
 
                     b.Property<string>("Relation")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -388,33 +512,41 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmergencyContacts");
+                    b.ToTable("EmergencyContacts", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<Guid>("BankId")
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("Bonus")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("BranchId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -424,52 +556,64 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<decimal>("GrossSalary")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("HireDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<Guid>("ManagerId")
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("NetSalary")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.Property<Guid>("ProfessionId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ProfilePictureUrl")
                         .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
-
                     b.Property<decimal>("TaxAmount")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid?>("TerminationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BankId")
+                        .IsUnique();
 
                     b.HasIndex("BranchId");
 
@@ -479,107 +623,207 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("ProfessionId");
 
-                    b.ToTable("Employees");
+                    b.HasIndex("TerminationId")
+                        .IsUnique();
+
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.ExpenseRecordEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid?>("EmployeeEntityId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ExpenseDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
-                    b.Property<int>("ExpenseType")
-                        .HasColumnType("integer");
+                    b.Property<string>("ExpenseType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsReimbursed")
                         .HasColumnType("boolean");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeEntityId");
+
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("ExpenseRecords");
+                    b.ToTable("ExpenseRecords", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.LeaveRequestEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("ApprovedBy")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("EmployeeEntityId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("boolean");
 
                     b.Property<string>("LeaveType")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Reason")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<DateTime>("RequestDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeEntityId");
+
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("LeaveRequests");
+                    b.ToTable("LeaveRequests", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.OvertimeEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("EmployeeEntityId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("timestamp");
+
+                    b.Property<decimal>("HourlyRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("timestamp");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeEntityId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Overtimes", (string)null);
+                });
+
+            modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.PayrollEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<decimal>("Bonus")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -587,17 +831,20 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<decimal>("GrossSalary")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("HourlyRate")
-                        .HasColumnType("numeric");
+                    b.Property<decimal>("NetSalary")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime>("PayDate")
+                        .HasColumnType("timestamp");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("numeric");
+                    b.Property<decimal>("TaxDeduction")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -606,163 +853,232 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Overtimes");
+                    b.ToTable("Payrolls", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.PerformanceReviewEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("Comments")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("EmployeeEntityId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("Reviewer")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("Score")
                         .HasColumnType("integer");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeEntityId");
+
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("PerformanceReviews");
+                    b.ToTable("PerformanceReviews", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.ProfessionEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProfessionEntity");
+                    b.ToTable("Professions", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.PromotionEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("ApprovedBy")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Comments")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("EmployeeEntityId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("NewPosition")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("PromotionDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeEntityId");
+
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Promotions");
+                    b.ToTable("Promotions", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.ShiftScheduleEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("EmployeeEntityId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<DateTime>("ShiftEnd")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime>("ShiftStart")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeEntityId");
+
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("ShiftSchedules");
+                    b.ToTable("ShiftSchedules", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.TerminationEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("Comments")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -775,39 +1091,53 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.Property<string>("Reason")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<DateTime>("TerminationDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
+                    b.HasIndex("EmployeeId");
 
-                    b.ToTable("Terminations");
+                    b.ToTable("Terminations", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Kernel.Security.Models.EmailAuthenticatorEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<string>("ActivationKey")
-                        .HasColumnType("text");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsVerified")
                         .HasColumnType("boolean");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -819,41 +1149,59 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("EmailAuthenticators");
+                    b.ToTable("EmailAuthenticators", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Kernel.Security.Models.OperationClaimEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("OperationClaims");
+                    b.ToTable("OperationClaims", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Kernel.Security.Models.OtpAuthenticatorEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
@@ -865,6 +1213,9 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("bytea");
 
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -875,7 +1226,7 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("OtpAuthenticators");
+                    b.ToTable("OtpAuthenticators", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Kernel.Security.Models.RefreshTokenEntity", b =>
@@ -886,34 +1237,48 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("integer");
+
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("DeletedBy")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("Expires")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("ReasonRevoked")
-                        .HasColumnType("text");
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("ReplacedByToken")
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<DateTime?>("Revoked")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("RevokedByIp")
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Token")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -925,35 +1290,46 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens");
+                    b.ToTable("RefreshTokens", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Kernel.Security.Models.UserEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
-                    b.Property<int>("AuthenticatorType")
-                        .HasColumnType("integer");
+                    b.Property<string>("AuthenticatorType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
@@ -964,32 +1340,47 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                         .HasColumnType("bytea");
 
                     b.Property<string>("PhoneNumber")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Kernel.Security.Models.UserOperationClaimEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("OperationClaimId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -1004,7 +1395,7 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserOperationClaims");
+                    b.ToTable("UserOperationClaims", (string)null);
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.AdvanceRequestEntity", b =>
@@ -1034,17 +1425,6 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                     b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
                         .WithMany("Awards")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.BankDetailEntity", b =>
-                {
-                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
-                        .WithOne("BankDetail")
-                        .HasForeignKey("Moongazing.Empyrean.Domain.Entities.BankDetailEntity", "EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1108,6 +1488,12 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", b =>
                 {
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.BankDetailEntity", "BankDetail")
+                        .WithOne("Employee")
+                        .HasForeignKey("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "BankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Moongazing.Empyrean.Domain.Entities.BranchEntity", "Branch")
                         .WithMany("Employees")
                         .HasForeignKey("BranchId")
@@ -1115,7 +1501,7 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Moongazing.Empyrean.Domain.Entities.DepartmentEntity", "Department")
-                        .WithMany()
+                        .WithMany("Employees")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1123,7 +1509,7 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                     b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Manager")
                         .WithMany("Subordinates")
                         .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Moongazing.Empyrean.Domain.Entities.ProfessionEntity", "Profession")
@@ -1132,6 +1518,13 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.TerminationEntity", "TerminationDetails")
+                        .WithOne()
+                        .HasForeignKey("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "TerminationId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("BankDetail");
+
                     b.Navigation("Branch");
 
                     b.Navigation("Department");
@@ -1139,12 +1532,18 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                     b.Navigation("Manager");
 
                     b.Navigation("Profession");
+
+                    b.Navigation("TerminationDetails");
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.ExpenseRecordEntity", b =>
                 {
-                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", null)
                         .WithMany("ExpenseRecords")
+                        .HasForeignKey("EmployeeEntityId");
+
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1154,8 +1553,12 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.LeaveRequestEntity", b =>
                 {
-                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", null)
                         .WithMany("LeaveRequests")
+                        .HasForeignKey("EmployeeEntityId");
+
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1165,8 +1568,23 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.OvertimeEntity", b =>
                 {
-                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", null)
                         .WithMany("Overtimes")
+                        .HasForeignKey("EmployeeEntityId");
+
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.PayrollEntity", b =>
+                {
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                        .WithMany("Payrolls")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1176,8 +1594,12 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.PerformanceReviewEntity", b =>
                 {
-                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", null)
                         .WithMany("PerformanceReviews")
+                        .HasForeignKey("EmployeeEntityId");
+
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1187,8 +1609,12 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.PromotionEntity", b =>
                 {
-                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", null)
                         .WithMany("Promotions")
+                        .HasForeignKey("EmployeeEntityId");
+
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1198,8 +1624,12 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.ShiftScheduleEntity", b =>
                 {
-                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", null)
                         .WithMany("ShiftSchedules")
+                        .HasForeignKey("EmployeeEntityId");
+
+                    b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1210,8 +1640,8 @@ namespace Moongazing.Empyrean.Persistence.Migrations
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.TerminationEntity", b =>
                 {
                     b.HasOne("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", "Employee")
-                        .WithOne("TerminationDetails")
-                        .HasForeignKey("Moongazing.Empyrean.Domain.Entities.TerminationEntity", "EmployeeId")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1270,6 +1700,12 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.BankDetailEntity", b =>
+                {
+                    b.Navigation("Employee")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.BranchEntity", b =>
                 {
                     b.Navigation("Employees");
@@ -1278,6 +1714,8 @@ namespace Moongazing.Empyrean.Persistence.Migrations
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.DepartmentEntity", b =>
                 {
                     b.Navigation("Branches");
+
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.EmployeeEntity", b =>
@@ -1287,9 +1725,6 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                     b.Navigation("Attendances");
 
                     b.Navigation("Awards");
-
-                    b.Navigation("BankDetail")
-                        .IsRequired();
 
                     b.Navigation("Benefits");
 
@@ -1305,6 +1740,8 @@ namespace Moongazing.Empyrean.Persistence.Migrations
 
                     b.Navigation("Overtimes");
 
+                    b.Navigation("Payrolls");
+
                     b.Navigation("PerformanceReviews");
 
                     b.Navigation("Promotions");
@@ -1312,8 +1749,6 @@ namespace Moongazing.Empyrean.Persistence.Migrations
                     b.Navigation("ShiftSchedules");
 
                     b.Navigation("Subordinates");
-
-                    b.Navigation("TerminationDetails");
                 });
 
             modelBuilder.Entity("Moongazing.Empyrean.Domain.Entities.ProfessionEntity", b =>

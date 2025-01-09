@@ -13,7 +13,7 @@ public class AwardEntityConfiguration : IEntityTypeConfiguration<AwardEntity>
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.AwardName)
@@ -25,7 +25,7 @@ public class AwardEntityConfiguration : IEntityTypeConfiguration<AwardEntity>
                .IsRequired();
 
         builder.Property(e => e.AwardDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.EmployeeId)

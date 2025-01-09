@@ -13,7 +13,7 @@ public class EmployeeEntityConfiguration : IEntityTypeConfiguration<EmployeeEnti
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-               .HasDefaultValueSql("NEWID()")
+               .HasDefaultValueSql("gen_random_uuid()")
                .IsRequired();
 
         builder.Property(e => e.FirstName)
@@ -33,7 +33,7 @@ public class EmployeeEntityConfiguration : IEntityTypeConfiguration<EmployeeEnti
                .IsRequired();
 
         builder.Property(e => e.DateOfBirth)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.Address)
@@ -49,7 +49,7 @@ public class EmployeeEntityConfiguration : IEntityTypeConfiguration<EmployeeEnti
                .IsRequired();
 
         builder.Property(e => e.HireDate)
-               .HasColumnType("datetime")
+               .HasColumnType("timestamp")
                .IsRequired();
 
         builder.Property(e => e.DepartmentId)
@@ -92,12 +92,12 @@ public class EmployeeEntityConfiguration : IEntityTypeConfiguration<EmployeeEnti
                .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasOne(e => e.BankDetail)
-               .WithOne()
+               .WithOne(e => e.Employee)
                .HasForeignKey<EmployeeEntity>(e => e.BankId)
                .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.Branch)
-               .WithMany()
+               .WithMany(e=>e.Employees)
                .HasForeignKey(e => e.BranchId)
                .OnDelete(DeleteBehavior.Cascade);
 
@@ -112,7 +112,7 @@ public class EmployeeEntityConfiguration : IEntityTypeConfiguration<EmployeeEnti
                .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.Department)
-               .WithMany()
+               .WithMany(e=>e.Employees)
                .HasForeignKey(e => e.DepartmentId)
                .OnDelete(DeleteBehavior.Cascade);
 
@@ -147,7 +147,7 @@ public class EmployeeEntityConfiguration : IEntityTypeConfiguration<EmployeeEnti
                .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(e => e.Documents)
-               .WithOne()
+               .WithOne(e => e.Employee)
                .HasForeignKey(e => e.EmployeeId)
                .OnDelete(DeleteBehavior.Cascade);
 
