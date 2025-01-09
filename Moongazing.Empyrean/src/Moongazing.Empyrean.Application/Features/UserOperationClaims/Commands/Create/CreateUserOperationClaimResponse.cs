@@ -1,6 +1,6 @@
 ﻿using Moongazing.Kernel.Application.Responses;
 
-namespace Doing.Retail.Application.Features.UserOperationClaims.Commands.Create;
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Commands.Create;
 
 public class CreateUserOperationClaimResponse : IResponse
 {

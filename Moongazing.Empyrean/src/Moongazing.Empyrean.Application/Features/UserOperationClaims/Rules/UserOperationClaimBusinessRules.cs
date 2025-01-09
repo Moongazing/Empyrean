@@ -1,11 +1,11 @@
-﻿using Doing.Retail.Application.Features.UserOperationClaims.Constants;
-using Doing.Retail.Application.Services.Repositories;
+﻿using Doing.Retail.Application.Services.Repositories;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Constants;
 using Moongazing.Kernel.Application.Rules;
 using Moongazing.Kernel.CrossCuttingConcerns.Exceptions.Types;
 using Moongazing.Kernel.Localization.Abstractions;
 using Moongazing.Kernel.Security.Models;
 
-namespace Doing.Retail.Application.Features.UserOperationClaims.Rules;
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Rules;
 
 public class UserOperationClaimBusinessRules : BaseBusinessRules
 {

@@ -1,4 +1,6 @@
-﻿namespace Doing.Retail.Application.Features.UserOperationClaims.Queries.GetById;
+﻿using Moongazing.Kernel.Application.Responses;
+
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Queries.GetById;
 
 public class GetByIdUserOperationClaimResponse : IResponse
 {

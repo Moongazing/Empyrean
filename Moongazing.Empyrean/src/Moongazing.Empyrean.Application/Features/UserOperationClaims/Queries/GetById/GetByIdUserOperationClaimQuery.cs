@@ -1,10 +1,17 @@
-﻿using Doing.Retail.Application.Features.UserOperationClaims.Rules;
+﻿using AutoMapper;
 using Doing.Retail.Application.Services.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using static Doing.Retail.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Rules;
+using Moongazing.Kernel.Application.Pipelines.Authorization;
+using Moongazing.Kernel.Application.Pipelines.Caching;
+using Moongazing.Kernel.Application.Pipelines.Logging;
+using Moongazing.Kernel.Application.Pipelines.Performance;
+using Moongazing.Kernel.Security.Constants;
+using Moongazing.Kernel.Security.Models;
+using static Moongazing.Empyrean.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
 
-namespace Doing.Retail.Application.Features.UserOperationClaims.Queries.GetById;
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Queries.GetById;
 
 public class GetByIdUserOperationClaimQuery : IRequest<GetByIdUserOperationClaimResponse>,
     ISecuredRequest, ILoggableRequest, ICachableRequest, IIntervalRequest
@@ -14,7 +21,7 @@ public class GetByIdUserOperationClaimQuery : IRequest<GetByIdUserOperationClaim
     public int Interval => 15;
     public string CacheKey => $"{GetType().Name}({Id})";
     public bool BypassCache { get; }
-    public string? CacheGroupKey => CacheGroupKeys.UserOperationClaims;
+    public string? CacheGroupKey => "UserOperationClaims";
     public TimeSpan? SlidingExpiration { get; }
 
 

@@ -1,10 +1,10 @@
 ﻿using Doing.Retail.Application.Services.AuthenticatorService;
-using Doing.Retail.Application.Services.Cache;
 using Doing.Retail.Application.Services.User;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Moongazing.Empyrean.Application.Services.Auth;
 using Moongazing.Empyrean.Application.Services.AuthenticatorService;
+using Moongazing.Empyrean.Application.Services.Cache;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
 using Moongazing.Kernel.Application.Pipelines.Caching;
 using Moongazing.Kernel.Application.Pipelines.CircuitBreaker;

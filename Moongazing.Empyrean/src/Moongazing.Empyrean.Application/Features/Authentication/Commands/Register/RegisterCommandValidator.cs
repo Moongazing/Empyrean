@@ -1,7 +1,6 @@
-﻿using Doing.Retail.Application.Features.Authentication.Commands.Register;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Doing.Retail.Application.Features.Authentication.Validators;
+namespace Moongazing.Empyrean.Application.Features.Authentication.Commands.Register;
 
 public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
 {
@@ -25,7 +24,7 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
             .NotEmpty()
             .MinimumLength(7)
             .MaximumLength(20)
-            .Matches(Moongazing.Empyrean.Domain.Constants.Constants.PasswordRegex);
+            .Matches(Domain.Constants.Constants.PasswordRegex);
     }
 }
 

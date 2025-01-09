@@ -1,10 +1,10 @@
-﻿using Doing.Retail.Application.Features.Authentication.Commands.Login;
-using Doing.Retail.Application.Features.Authentication.Commands.Register;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Moongazing.Empyrean.Application.Features.Authentication.Commands.EnableEmailAuthenticator;
 using Moongazing.Empyrean.Application.Features.Authentication.Commands.EnableOtpAuthenticator;
+using Moongazing.Empyrean.Application.Features.Authentication.Commands.Login;
 using Moongazing.Empyrean.Application.Features.Authentication.Commands.Refresh;
+using Moongazing.Empyrean.Application.Features.Authentication.Commands.Register;
 using Moongazing.Empyrean.Application.Features.Authentication.Commands.Revoke;
 using Moongazing.Empyrean.Application.Features.Authentication.Commands.VerifyEmailAuthenticator;
 using Moongazing.Empyrean.Application.Features.Authentication.Commands.VerifyOtpAuthenticator;
@@ -14,7 +14,7 @@ using Moongazing.Kernel.Security.Models;
 
 namespace Moongazing.Empyrean.WebApi.Controllers;
 
-[Route("api/empyrean/authentications")]
+[Route("api/empyrean/authentication")]
 [ApiController]
 public sealed class AuthenticationController : BaseController
 {

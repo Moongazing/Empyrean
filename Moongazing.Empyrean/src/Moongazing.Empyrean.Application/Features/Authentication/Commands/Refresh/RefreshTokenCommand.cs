@@ -1,8 +1,8 @@
-﻿using Doing.Retail.Application.Features.Authentication.Commands.Refresh;
-using Doing.Retail.Application.Features.Authentication.Rules;
+﻿using Doing.Retail.Application.Features.Authentication.Rules;
 using Doing.Retail.Application.Services.User;
 using MediatR;
 using Moongazing.Empyrean.Application.Services.Auth;
+using Moongazing.Kernel.Application.Pipelines.Logging;
 using Moongazing.Kernel.Application.Pipelines.Performance;
 using Moongazing.Kernel.Application.Pipelines.Transaction;
 using Moongazing.Kernel.Security.Jwt;
@@ -10,8 +10,7 @@ using Moongazing.Kernel.Security.Models;
 
 namespace Moongazing.Empyrean.Application.Features.Authentication.Commands.Refresh;
 
-public class RefreshTokenCommand : IRequest<RefreshTokenResponse>,
-    ITransactionalRequest, IIntervalRequest
+public class RefreshTokenCommand : IRequest<RefreshTokenResponse>, ILoggableRequest, ITransactionalRequest, IIntervalRequest
 {
     public string RefreshToken { get; set; } = default!;
     public string IpAddress { get; set; } = default!;

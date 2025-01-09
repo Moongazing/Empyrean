@@ -1,6 +1,6 @@
 using Moongazing.Kernel.Application.Responses;
 
-namespace Doing.Retail.Application.Features.OperationClaims.Queries.GetById;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Queries.GetById;
 
 public class GetByIdOperationClaimResponse : IResponse
 {

@@ -11,10 +11,10 @@ using Moongazing.Kernel.Persistence.Dynamic;
 using Moongazing.Kernel.Persistence.Paging;
 using Moongazing.Kernel.Security.Constants;
 using Moongazing.Kernel.Security.Models;
-using static Doing.Retail.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
+using static Moongazing.Empyrean.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
 
 
-namespace Doing.Retail.Application.Features.UserOperationClaims.Queries.GetListDynamic;
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Queries.GetListDynamic;
 
 public class GetListByDynamicUserOperationClaimQuery : IRequest<GetListResponse<GetListByDynamicUserOperationClaimResponse>>,
     ISecuredRequest, ILoggableRequest, IIntervalRequest

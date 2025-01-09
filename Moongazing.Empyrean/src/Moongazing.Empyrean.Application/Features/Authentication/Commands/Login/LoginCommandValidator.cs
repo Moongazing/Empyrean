@@ -1,7 +1,6 @@
-﻿using Doing.Retail.Application.Features.Authentication.Commands.Login;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Doing.Retail.Application.Features.Authentication.Validators;
+namespace Moongazing.Empyrean.Application.Features.Authentication.Commands.Login;
 
 public class LoginCommandValidator : AbstractValidator<LoginCommand>
 {

@@ -1,7 +1,7 @@
 ﻿using StackExchange.Redis;
 using System.Text.Json;
 
-namespace Doing.Retail.Application.Services.Cache;
+namespace Moongazing.Empyrean.Application.Services.Cache;
 
 public class CacheService : ICacheService
 {

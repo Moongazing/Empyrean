@@ -9,10 +9,10 @@ using Moongazing.Kernel.Application.Pipelines.Logging;
 using Moongazing.Kernel.Application.Pipelines.Performance;
 using Moongazing.Kernel.Security.Constants;
 using Moongazing.Kernel.Security.Models;
-using static Doing.Retail.Application.Features.OperationClaims.Constants.OperationClaimsOperationClaims;
+using static Moongazing.Empyrean.Application.Features.OperationClaims.Constants.OperationClaimsOperationClaims;
 
 
-namespace Doing.Retail.Application.Features.OperationClaims.Queries.GetById;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Queries.GetById;
 
 public class GetByIdOperationClaimQuery : IRequest<GetByIdOperationClaimResponse>,
     ISecuredRequest, IIntervalRequest, ICachableRequest, ILoggableRequest
@@ -41,11 +41,10 @@ public class GetByIdOperationClaimQuery : IRequest<GetByIdOperationClaimResponse
 
         public async Task<GetByIdOperationClaimResponse> Handle(GetByIdOperationClaimQuery request, CancellationToken cancellationToken)
         {
-            OperationClaimEntity? operationClaim = await operationClaimRepository.GetAsync(
-                predicate: b => b.Id == request.Id,
-                include: q => q.Include(oc => oc.UserOperationClaims),
-                cancellationToken: cancellationToken
-            );
+            OperationClaimEntity? operationClaim = await operationClaimRepository.GetAsync(predicate: b => b.Id == request.Id,
+                                                                                           include: q => q.Include(oc => oc.UserOperationClaims),
+                                                                                           cancellationToken: cancellationToken);
+
             await operationClaimBusinessRules.OperationClaimShouldExistWhenSelected(operationClaim!);
 
             GetByIdOperationClaimResponse response = mapper.Map<GetByIdOperationClaimResponse>(operationClaim!);

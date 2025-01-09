@@ -1,6 +1,6 @@
 using Moongazing.Kernel.Application.Responses;
 
-namespace Doing.Retail.Application.Features.OperationClaims.Commands.Update;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Commands.Update;
 
 public class UpdateOperationClaimResponse : IResponse
 {

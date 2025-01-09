@@ -1,7 +1,6 @@
-﻿using Doing.Retail.Application.Features.OperationClaims.Commands.Update;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Doing.Retail.Application.Features.OperationClaims.Validators;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Commands.Update;
 
 public class UpdateOperationClaimCommandValidator : AbstractValidator<UpdateOperationClaimCommand>
 {

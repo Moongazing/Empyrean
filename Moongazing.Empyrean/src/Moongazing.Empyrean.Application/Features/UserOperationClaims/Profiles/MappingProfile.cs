@@ -1,40 +1,44 @@
-﻿using Doing.Retail.Application.Features.UserOperationClaims.Commands.Create;
-using Doing.Retail.Application.Features.UserOperationClaims.Commands.Delete;
-using Doing.Retail.Application.Features.UserOperationClaims.Commands.Update;
-using Doing.Retail.Application.Features.UserOperationClaims.Queries.GetById;
-using Doing.Retail.Application.Features.UserOperationClaims.Queries.GetList;
-using Doing.Retail.Application.Features.UserOperationClaims.Queries.GetListDynamic;
+﻿using AutoMapper;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Commands.Create;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Commands.Delete;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Commands.Update;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Queries.GetById;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Queries.GetList;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Queries.GetListDynamic;
+using Moongazing.Kernel.Application.Responses;
+using Moongazing.Kernel.Persistence.Paging;
+using Moongazing.Kernel.Security.Models;
 
 namespace Doing.Retail.Application.Features.UserOperationClaims.Profiles;
 
-public class MappingProfiles : IRegister
+public class MappingProfiles : Profile
 {
-    public void Register(TypeAdapterConfig config)
+    public MappingProfiles()
     {
-        config.NewConfig<UserOperationClaimEntity, CreateUserOperationClaimCommand>();
-        config.NewConfig<UserOperationClaimEntity, CreateUserOperationClaimResponse>();
+        CreateMap<UserOperationClaimEntity, CreateUserOperationClaimCommand>();
+        CreateMap<UserOperationClaimEntity, CreateUserOperationClaimResponse>();
 
-        config.NewConfig<UserOperationClaimEntity, UpdateUserOperationClaimCommand>();
-        config.NewConfig<UserOperationClaimEntity, UpdateUserOperationClaimResponse>();
+        CreateMap<UserOperationClaimEntity, UpdateUserOperationClaimCommand>();
+        CreateMap<UserOperationClaimEntity, UpdateUserOperationClaimResponse>();
 
-        config.NewConfig<UserOperationClaimEntity, DeleteUserOperationClaimCommand>();
-        config.NewConfig<UserOperationClaimEntity, DeleteUserOperationClaimResponse>();
+        CreateMap<UserOperationClaimEntity, DeleteUserOperationClaimCommand>();
+        CreateMap<UserOperationClaimEntity, DeleteUserOperationClaimResponse>();
 
-        config.NewConfig<UserOperationClaimEntity, GetByIdUserOperationClaimQuery>();
-        config.NewConfig<UserOperationClaimEntity, GetByIdUserOperationClaimResponse>()
-              .Map(dest => dest.OperationClaimName, src => src.OperationClaim.Name)
-              .TwoWays();
+        CreateMap<UserOperationClaimEntity, GetByIdUserOperationClaimQuery>();
+        CreateMap<UserOperationClaimEntity, GetByIdUserOperationClaimResponse>()
+            .ForMember(dest => dest.OperationClaimName, opt => opt.MapFrom(src => src.OperationClaim.Name))
+            .ReverseMap();
 
-        config.NewConfig<UserOperationClaimEntity, GetListUserOperationClaimResponse>()
-              .Map(dest => dest.OperationClaimName, src => src.OperationClaim.Name);
+        CreateMap<UserOperationClaimEntity, GetListUserOperationClaimResponse>()
+            .ForMember(dest => dest.OperationClaimName, opt => opt.MapFrom(src => src.OperationClaim.Name));
 
-        config.NewConfig<Paginate<UserOperationClaimEntity>, GetListResponse<GetListUserOperationClaimResponse>>();
+        CreateMap<IPagebale<UserOperationClaimEntity>, GetListResponse<GetListUserOperationClaimResponse>>();
 
-        config.NewConfig<UserOperationClaimEntity, GetListByDynamicUserOperationClaimResponse>()
-              .Map(dest => dest.OperationClaimName, src => src.OperationClaim.Name)
-              .TwoWays();
+        CreateMap<UserOperationClaimEntity, GetListByDynamicUserOperationClaimResponse>()
+            .ForMember(dest => dest.OperationClaimName, opt => opt.MapFrom(src => src.OperationClaim.Name))
+            .ReverseMap();
 
-        config.NewConfig<Paginate<UserOperationClaimEntity>, GetListResponse<GetListByDynamicUserOperationClaimResponse>>()
-              .TwoWays();
+        CreateMap<IPagebale<UserOperationClaimEntity>, GetListResponse<GetListByDynamicUserOperationClaimResponse>>()
+            .ReverseMap();
     }
 }

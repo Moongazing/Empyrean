@@ -1,7 +1,6 @@
-﻿using Doing.Retail.Application.Features.UserOperationClaims.Commands.Create;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Doing.Retail.Application.Features.UserOperationClaims.Validators;
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Commands.Create;
 
 public class CreateUserOperationClaimCommandValidator : AbstractValidator<CreateUserOperationClaimCommand>
 {

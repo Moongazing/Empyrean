@@ -1,10 +1,18 @@
-﻿using Doing.Retail.Application.Features.UserOperationClaims.Rules;
+﻿using AutoMapper;
 using Doing.Retail.Application.Services.Repositories;
 using MediatR;
-using static Doing.Retail.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
+using Moongazing.Empyrean.Application.Features.UserOperationClaims.Rules;
+using Moongazing.Kernel.Application.Pipelines.Authorization;
+using Moongazing.Kernel.Application.Pipelines.Caching;
+using Moongazing.Kernel.Application.Pipelines.Logging;
+using Moongazing.Kernel.Application.Pipelines.Performance;
+using Moongazing.Kernel.Application.Pipelines.Transaction;
+using Moongazing.Kernel.Security.Constants;
+using Moongazing.Kernel.Security.Models;
+using static Moongazing.Empyrean.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
 
 
-namespace Doing.Retail.Application.Features.UserOperationClaims.Commands.Create;
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Commands.Create;
 
 public class CreateUserOperationClaimCommand : IRequest<CreateUserOperationClaimResponse>,
     ISecuredRequest, ILoggableRequest, ITransactionalRequest, ICacheRemoverRequest, IIntervalRequest
@@ -13,7 +21,7 @@ public class CreateUserOperationClaimCommand : IRequest<CreateUserOperationClaim
     public Guid OperationClaimId { get; set; }
     public string[] Roles => [Admin, Write, Add, GeneralOperationClaims.Write];
     public bool BypassCache { get; }
-    public string? CacheGroupKey => CacheGroupKeys.UserOperationClaims;
+    public string? CacheGroupKey => "UserOperationClaims";
     public string? CacheKey => null;
     public int Interval => 15;
 

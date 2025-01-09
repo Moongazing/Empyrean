@@ -1,6 +1,6 @@
 ﻿using Moongazing.Kernel.Application.Responses;
 
-namespace Doing.Retail.Application.Features.OperationClaims.Queries.GetListByDynamic;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Queries.GetListByDynamic;
 
 public class GetListByDynamicOperationClaimResponse : IResponse
 {

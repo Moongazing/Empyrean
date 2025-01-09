@@ -10,10 +10,10 @@ using Moongazing.Kernel.Persistence.Dynamic;
 using Moongazing.Kernel.Persistence.Paging;
 using Moongazing.Kernel.Security.Constants;
 using Moongazing.Kernel.Security.Models;
-using static Doing.Retail.Application.Features.OperationClaims.Constants.OperationClaimsOperationClaims;
+using static Moongazing.Empyrean.Application.Features.OperationClaims.Constants.OperationClaimsOperationClaims;
 
 
-namespace Doing.Retail.Application.Features.OperationClaims.Queries.GetListByDynamic;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Queries.GetListByDynamic;
 
 public class GetListByDynamicOperationClaimQuery : IRequest<GetListResponse<GetListByDynamicOperationClaimResponse>>, ILoggableRequest, ISecuredRequest, IIntervalRequest
 {
@@ -35,9 +35,9 @@ public class GetListByDynamicOperationClaimQuery : IRequest<GetListResponse<GetL
         public async Task<GetListResponse<GetListByDynamicOperationClaimResponse>> Handle(GetListByDynamicOperationClaimQuery request, CancellationToken cancellationToken)
         {
             IPagebale<OperationClaimEntity> opertaionClaim = await operationClaimRepository.GetListByDynamicAsync(dynamic: request.DynamicQuery,
-               index: request.PageRequest.PageIndex,
-               size: request.PageRequest.PageSize,
-               cancellationToken: cancellationToken);
+                                                                                                                  index: request.PageRequest.PageIndex,
+                                                                                                                  size: request.PageRequest.PageSize,
+                                                                                                                  cancellationToken: cancellationToken);
 
 
             GetListResponse<GetListByDynamicOperationClaimResponse> response = mapper.Map<GetListResponse<GetListByDynamicOperationClaimResponse>>(opertaionClaim);

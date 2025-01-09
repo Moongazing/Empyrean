@@ -1,4 +1,4 @@
-namespace Doing.Retail.Application.Features.OperationClaims.Constants;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Constants;
 
 public static class OperationClaimsMessages
 {

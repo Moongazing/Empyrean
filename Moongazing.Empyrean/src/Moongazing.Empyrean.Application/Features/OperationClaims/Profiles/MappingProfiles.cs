@@ -1,10 +1,10 @@
 using AutoMapper;
-using Doing.Retail.Application.Features.OperationClaims.Commands.Delete;
-using Doing.Retail.Application.Features.OperationClaims.Commands.Update;
-using Doing.Retail.Application.Features.OperationClaims.Queries.GetById;
-using Doing.Retail.Application.Features.OperationClaims.Queries.GetList;
-using Doing.Retail.Application.Features.OperationClaims.Queries.GetListByDynamic;
 using Moongazing.Empyrean.Application.Features.OperationClaims.Commands.Create;
+using Moongazing.Empyrean.Application.Features.OperationClaims.Commands.Delete;
+using Moongazing.Empyrean.Application.Features.OperationClaims.Commands.Update;
+using Moongazing.Empyrean.Application.Features.OperationClaims.Queries.GetById;
+using Moongazing.Empyrean.Application.Features.OperationClaims.Queries.GetList;
+using Moongazing.Empyrean.Application.Features.OperationClaims.Queries.GetListByDynamic;
 using Moongazing.Kernel.Application.Responses;
 using Moongazing.Kernel.Persistence.Paging;
 using Moongazing.Kernel.Security.Models;

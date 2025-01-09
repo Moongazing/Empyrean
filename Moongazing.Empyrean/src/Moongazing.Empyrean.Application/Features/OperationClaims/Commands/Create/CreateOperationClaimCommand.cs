@@ -9,7 +9,7 @@ using Moongazing.Kernel.Application.Pipelines.Performance;
 using Moongazing.Kernel.Application.Pipelines.Transaction;
 using Moongazing.Kernel.Security.Constants;
 using Moongazing.Kernel.Security.Models;
-using static Doing.Retail.Application.Features.OperationClaims.Constants.OperationClaimsOperationClaims;
+using static Moongazing.Empyrean.Application.Features.OperationClaims.Constants.OperationClaimsOperationClaims;
 
 namespace Moongazing.Empyrean.Application.Features.OperationClaims.Commands.Create;
 

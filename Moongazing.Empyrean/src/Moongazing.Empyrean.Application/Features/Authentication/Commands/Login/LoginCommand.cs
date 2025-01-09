@@ -1,7 +1,6 @@
 ﻿using Doing.Retail.Application.Features.Authentication.Rules;
 using Doing.Retail.Application.Services.User;
 using MediatR;
-using Moongazing.Empyrean.Application.Features.Authentication.Commands.Login;
 using Moongazing.Empyrean.Application.Services.Auth;
 using Moongazing.Empyrean.Application.Services.AuthenticatorService;
 using Moongazing.Kernel.Application.Dtos;
@@ -11,7 +10,7 @@ using Moongazing.Kernel.Security.Jwt;
 using Moongazing.Kernel.Security.Models;
 using Moongazing.Kernel.Security.Models.Enums;
 
-namespace Doing.Retail.Application.Features.Authentication.Commands.Login;
+namespace Moongazing.Empyrean.Application.Features.Authentication.Commands.Login;
 
 public class LoginCommand : IRequest<LoginResponse>, ILoggableRequest, IIntervalRequest
 {
@@ -39,9 +38,8 @@ public class LoginCommand : IRequest<LoginResponse>, ILoggableRequest, IInterval
 
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            UserEntity? user = await userService.GetAsync(
-                predicate: u => u.Email == request.UserLoginDto.Email,
-                cancellationToken: cancellationToken);
+            UserEntity? user = await userService.GetAsync(predicate: u => u.Email == request.UserLoginDto.Email,
+                                                          cancellationToken: cancellationToken);
 
             await authBusinessRules.UserShouldBeExistsWhenSelected(user);
 
@@ -69,8 +67,6 @@ public class LoginCommand : IRequest<LoginResponse>, ILoggableRequest, IInterval
 
             loggedResponse.AccessToken = createdAccessToken;
             loggedResponse.RefreshToken = addedRefreshToken;
-
-
 
             return loggedResponse;
         }

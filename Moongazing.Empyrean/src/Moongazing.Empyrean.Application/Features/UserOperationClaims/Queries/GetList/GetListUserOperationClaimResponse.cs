@@ -1,4 +1,6 @@
-﻿namespace Doing.Retail.Application.Features.UserOperationClaims.Queries.GetList;
+﻿using Moongazing.Kernel.Application.Responses;
+
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Queries.GetList;
 
 public class GetListUserOperationClaimResponse : IResponse
 {

@@ -1,8 +1,8 @@
 using AutoMapper;
-using Doing.Retail.Application.Features.OperationClaims.Constants;
 using Doing.Retail.Application.Features.OperationClaims.Rules;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Moongazing.Empyrean.Application.Features.OperationClaims.Constants;
 using Moongazing.Empyrean.Application.Repositories;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
 using Moongazing.Kernel.Application.Pipelines.Caching;
@@ -11,9 +11,9 @@ using Moongazing.Kernel.Application.Pipelines.Performance;
 using Moongazing.Kernel.Application.Pipelines.Transaction;
 using Moongazing.Kernel.Security.Constants;
 using Moongazing.Kernel.Security.Models;
-using static Doing.Retail.Application.Features.OperationClaims.Constants.OperationClaimsOperationClaims;
+using static Moongazing.Empyrean.Application.Features.OperationClaims.Constants.OperationClaimsOperationClaims;
 
-namespace Doing.Retail.Application.Features.OperationClaims.Commands.Delete;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Commands.Delete;
 
 public class DeleteOperationClaimCommand : IRequest<DeleteOperationClaimResponse>,
     ISecuredRequest, ILoggableRequest, ICacheRemoverRequest, IIntervalRequest, ITransactionalRequest

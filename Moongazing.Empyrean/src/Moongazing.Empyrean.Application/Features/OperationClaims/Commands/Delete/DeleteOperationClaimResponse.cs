@@ -1,6 +1,6 @@
 using Moongazing.Kernel.Application.Responses;
 
-namespace Doing.Retail.Application.Features.OperationClaims.Commands.Delete;
+namespace Moongazing.Empyrean.Application.Features.OperationClaims.Commands.Delete;
 
 public class DeleteOperationClaimResponse : IResponse
 {

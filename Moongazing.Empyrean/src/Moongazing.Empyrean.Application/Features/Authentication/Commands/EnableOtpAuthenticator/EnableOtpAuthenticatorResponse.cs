@@ -1,6 +1,6 @@
 ﻿using Moongazing.Kernel.Application.Responses;
 
-namespace Doing.Retail.Application.Features.Authentication.Commands.EnableOtpAuthenticator;
+namespace Moongazing.Empyrean.Application.Features.Authentication.Commands.EnableOtpAuthenticator;
 
 public class EnableOtpAuthenticatorResponse : IResponse
 {

@@ -1,10 +1,20 @@
-﻿using Doing.Retail.Application.Services.Repositories;
+﻿using AutoMapper;
+using Doing.Retail.Application.Services.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using static Doing.Retail.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
+using Moongazing.Kernel.Application.Pipelines.Authorization;
+using Moongazing.Kernel.Application.Pipelines.Caching;
+using Moongazing.Kernel.Application.Pipelines.Logging;
+using Moongazing.Kernel.Application.Pipelines.Performance;
+using Moongazing.Kernel.Application.Requests;
+using Moongazing.Kernel.Application.Responses;
+using Moongazing.Kernel.Persistence.Paging;
+using Moongazing.Kernel.Security.Constants;
+using Moongazing.Kernel.Security.Models;
+using static Moongazing.Empyrean.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
 
 
-namespace Doing.Retail.Application.Features.UserOperationClaims.Queries.GetList;
+namespace Moongazing.Empyrean.Application.Features.UserOperationClaims.Queries.GetList;
 
 public class GetListUserOperationClaimQuery : IRequest<GetListResponse<GetListUserOperationClaimResponse>>,
 ISecuredRequest, IIntervalRequest, ILoggableRequest, ICachableRequest
@@ -14,7 +24,7 @@ ISecuredRequest, IIntervalRequest, ILoggableRequest, ICachableRequest
     public int Interval => 15;
     public string CacheKey => $"{GetType().Name}({PageRequest.PageIndex}-{PageRequest.PageSize})";
     public bool BypassCache { get; }
-    public string? CacheGroupKey => CacheGroupKeys.UserOperationClaims;
+    public string? CacheGroupKey => "UserOperationClaims";
     public TimeSpan? SlidingExpiration { get; }
 
     public class GetListUserOperationClaimQueryHandler : IRequestHandler<GetListUserOperationClaimQuery, GetListResponse<GetListUserOperationClaimResponse>>
@@ -33,7 +43,7 @@ ISecuredRequest, IIntervalRequest, ILoggableRequest, ICachableRequest
         public async Task<GetListResponse<GetListUserOperationClaimResponse>> Handle(GetListUserOperationClaimQuery request, CancellationToken cancellationToken)
         {
 
-            Paginate<UserOperationClaimEntity> userOperationClaims = await userOperationClaimRepository.GetListAsync(
+            IPagebale<UserOperationClaimEntity> userOperationClaims = await userOperationClaimRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 include: u => u.Include(u => u.OperationClaim),
