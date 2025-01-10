@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Moongazing.Empyrean.Application.Features.BankDetails.Commands.Create;
-using Moongazing.Empyrean.Application.Features.BankDetails.Constants;
 using Moongazing.Empyrean.Application.Features.Employee.Rules;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Constants;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Rules;
@@ -14,12 +12,6 @@ using Moongazing.Kernel.Application.Pipelines.Logging;
 using Moongazing.Kernel.Application.Pipelines.Performance;
 using Moongazing.Kernel.Application.Pipelines.Transaction;
 using Moongazing.Kernel.Security.Constants;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Moongazing.Empyrean.Application.Features.LeaveRequests.Constants.LeaveRequestOperationClaims;
 
 namespace Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Create;

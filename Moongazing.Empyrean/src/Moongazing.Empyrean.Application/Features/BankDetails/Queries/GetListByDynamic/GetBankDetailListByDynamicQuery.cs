@@ -11,11 +11,6 @@ using Moongazing.Kernel.Application.Responses;
 using Moongazing.Kernel.Persistence.Dynamic;
 using Moongazing.Kernel.Persistence.Paging;
 using Moongazing.Kernel.Security.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Moongazing.Empyrean.Application.Features.BankDetails.Constants.BankDetailOperationClaims;
 
 namespace Moongazing.Empyrean.Application.Features.BankDetails.Queries.GetListByDynamic;
