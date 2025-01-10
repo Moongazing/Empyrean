@@ -5,9 +5,11 @@ using Moongazing.Empyrean.Application.Features.BankDetail.Queries.GetById;
 using Moongazing.Empyrean.Application.Features.BankDetail.Queries.GetList;
 using Moongazing.Empyrean.Application.Features.BankDetails.Commands.Create;
 using Moongazing.Empyrean.Application.Features.BankDetails.Commands.Delete;
+using Moongazing.Empyrean.Application.Features.BankDetails.Queries.GetListByDynamic;
 using Moongazing.Empyrean.WebApi.Controllers.Common;
 using Moongazing.Kernel.Application.Requests;
 using Moongazing.Kernel.Application.Responses;
+using Moongazing.Kernel.Persistence.Dynamic;
 
 namespace Moongazing.Empyrean.WebApi.Controllers;
 
@@ -56,6 +58,13 @@ public sealed class BankDetailsController : BaseController
     {
         GetBankDetailListQuery getBankDetailListQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetBankDetailListResponse> result = await Sender.Send(getBankDetailListQuery).ConfigureAwait(false);
+        return Ok(result);
+    }
+    [HttpPost("search")]
+    public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] DynamicQuery dynamicQuery)
+    {
+        GetBankDetailListByDynamicQuery getBankDetailListByDynamicQuery = new() { PageRequest = pageRequest, DynamicQuery = dynamicQuery };
+        GetListResponse<GetBankDetailListByDynamicResponse> result = await Sender.Send(getBankDetailListByDynamicQuery).ConfigureAwait(false);
         return Ok(result);
     }
 }
