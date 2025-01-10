@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Moongazing.Empyrean.Application.Features.BankDetails.Constants;
 using Moongazing.Empyrean.Application.Repositories;
 using Moongazing.Empyrean.Domain.Entities;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
@@ -23,7 +24,7 @@ public class GetBankDetailListQuery : IRequest<GetListResponse<GetBankDetailList
     public string[] Roles => [Admin, Read, GeneralOperationClaims.Read];
     public string CacheKey => $"{GetType().Name}({PageRequest.PageIndex}-{PageRequest.PageSize})";
     public bool BypassCache { get; }
-    public string? CacheGroupKey => "BankDetails";
+    public string? CacheGroupKey => BankDetailMessages.SectionName;
     public TimeSpan? SlidingExpiration { get; }
     public int Interval => 15;
 
