@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\BankDetail\Commands\Update\" />
     <Folder Include="Features\BankDetail\Profiles\" />
     <Folder Include="Features\BankDetail\Queries\" />
     <Folder Include="Features\Employee\Commands\" />
