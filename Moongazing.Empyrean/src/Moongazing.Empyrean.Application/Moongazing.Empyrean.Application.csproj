@@ -24,11 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\BankDetail\Profiles\" />
-    <Folder Include="Features\BankDetail\Queries\GetListByDynamic\" />
-    <Folder Include="Features\Employee\Commands\" />
-    <Folder Include="Features\Employee\Resources\" />
-    <Folder Include="Features\Employee\Profiles\" />
+    <Folder Include="Features\BankDetails\Profiles\" />
+    <Folder Include="Features\BankDetails\Queries\GetListByDynamic\" />
+    <Folder Include="Features\BankDetails\Resources\Locales\" />
+    <Folder Include="Features\Employees\Commands\" />
+    <Folder Include="Features\Employees\Resources\" />
+    <Folder Include="Features\Employees\Profiles\" />
   </ItemGroup>
 
 </Project>

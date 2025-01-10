@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Moongazing.Empyrean.Application.Features.BankDetails.Constants;
+﻿namespace Moongazing.Empyrean.Application.Features.BankDetails.Constants;
 
 public class BankDetailMessages
 {

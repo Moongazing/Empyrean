@@ -13,9 +13,9 @@ using Moongazing.Kernel.Security.Models;
 
 namespace Doing.Retail.Application.Features.Users.Profiles;
 
-public class UserMappingProfiles : Profile
+public class MappingProfiles : Profile
 {
-    public UserMappingProfiles()
+    public MappingProfiles()
     {
 
 
