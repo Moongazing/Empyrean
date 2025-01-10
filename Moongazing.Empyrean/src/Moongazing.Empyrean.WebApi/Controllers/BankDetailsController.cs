@@ -6,6 +6,8 @@ using Doing.Retail.Application.Features.Users.Queries.GetList;
 using Doing.Retail.Application.Features.Users.Queries.GetListByDynamic;
 using Microsoft.AspNetCore.Mvc;
 using Moongazing.Empyrean.Application.Features.BankDetail.Commands.Update;
+using Moongazing.Empyrean.Application.Features.BankDetail.Queries.GetByEmployeeId;
+using Moongazing.Empyrean.Application.Features.BankDetail.Queries.GetById;
 using Moongazing.Empyrean.Application.Features.BankDetails.Commands.Create;
 using Moongazing.Empyrean.Application.Features.BankDetails.Commands.Delete;
 using Moongazing.Empyrean.Application.Features.Users.Commands.Create;
@@ -36,11 +38,25 @@ public sealed class BankDetailsController : BaseController
         return Ok(result);
     }
 
-    [HttpDelete("update")]
+    [HttpPut("update")]
     public async Task<IActionResult> Update([FromBody] UpdateBankDetailCommand updateBankDetailCommand)
     {
         UpdateBankDetailResponse result = await Sender.Send(updateBankDetailCommand).ConfigureAwait(false);
         return Ok(result);
     }
+    [HttpGet("details/{employeeId:uuid}")]
+    public async Task<IActionResult> GetDetailByEmployeeId(Guid employeeId)
+    {
+        GetBankDetailByEmployeeIdQuery getBankDetailByEmployeeIdQuery = new() { EmployeeId = employeeId };
+        GetBankDetailByEmployeeIdResponse result = await Sender.Send(getBankDetailByEmployeeIdQuery).ConfigureAwait(false);
+        return Ok(result);
 
+    }
+    [HttpGet("details/{bankDetailId:uuid}")]
+    public async Task<IActionResult> GetDetailById(Guid bankDetailId)
+    {
+        GetBankDetailByIdQuery getBankDetailByIdQuery = new() { Id = bankDetailId };
+        GetBankDetailByIdResponse result = await Sender.Send(getBankDetailByIdQuery).ConfigureAwait(false);
+        return Ok(result);
+    }
 }
