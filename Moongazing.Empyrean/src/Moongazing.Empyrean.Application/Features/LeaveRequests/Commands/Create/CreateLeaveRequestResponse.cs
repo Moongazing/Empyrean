@@ -1,10 +1,11 @@
 ﻿using Moongazing.Empyrean.Domain.Enums;
-using Moongazing.Kernel.Persistence.Repositories.Common;
+using Moongazing.Kernel.Application.Responses;
 
-namespace Moongazing.Empyrean.Domain.Entities;
+namespace Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Create;
 
-public class LeaveRequestEntity : Entity<Guid>
+public class CreateLeaveRequestResponse : IResponse
 {
+    public Guid Id { get; set; }
     public Guid EmployeeId { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
@@ -13,12 +14,4 @@ public class LeaveRequestEntity : Entity<Guid>
     public bool IsApproved { get; set; } = false;
     public DateTime RequestDate { get; set; }
     public string ApprovedBy { get; set; } = default!;
-
-    public virtual EmployeeEntity Employee { get; set; } = default!;
-
-    public LeaveRequestEntity()
-    {
-
-    }
-
 }
