@@ -39,7 +39,7 @@ public sealed class BankDetailsController : BaseController
         return Ok(result);
     }
     [HttpGet("details/{employeeId:uuid}")]
-    public async Task<IActionResult> GetDetailByEmployeeId(Guid employeeId)
+    public async Task<IActionResult> GetDetailByEmployeeId([FromRoute] Guid employeeId)
     {
         GetBankDetailByEmployeeIdQuery getBankDetailByEmployeeIdQuery = new() { EmployeeId = employeeId };
         GetBankDetailByEmployeeIdResponse result = await Sender.Send(getBankDetailByEmployeeIdQuery).ConfigureAwait(false);
@@ -47,7 +47,7 @@ public sealed class BankDetailsController : BaseController
 
     }
     [HttpGet("details/{bankDetailId:uuid}")]
-    public async Task<IActionResult> GetDetailById(Guid bankDetailId)
+    public async Task<IActionResult> GetDetailById([FromRoute] Guid bankDetailId)
     {
         GetBankDetailByIdQuery getBankDetailByIdQuery = new() { Id = bankDetailId };
         GetBankDetailByIdResponse result = await Sender.Send(getBankDetailByIdQuery).ConfigureAwait(false);
