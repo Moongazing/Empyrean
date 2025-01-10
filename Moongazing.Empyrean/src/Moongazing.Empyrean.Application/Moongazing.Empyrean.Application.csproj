@@ -27,6 +27,23 @@
     <Folder Include="Features\Employees\Commands\" />
     <Folder Include="Features\Employees\Resources\" />
     <Folder Include="Features\Employees\Profiles\" />
+    <Folder Include="Features\AdvanceRequests\" />
+    <Folder Include="Features\Attendances\" />
+    <Folder Include="Features\Awards\" />
+    <Folder Include="Features\Benefits\" />
+    <Folder Include="Features\Branches\" />
+    <Folder Include="Features\Departments\" />
+    <Folder Include="Features\Documents\" />
+    <Folder Include="Features\DisciplinaryActions\" />
+    <Folder Include="Features\EmergencyContacts\" />
+    <Folder Include="Features\ExpenseRecords\" />
+    <Folder Include="Features\LeaveRequests\" />
+    <Folder Include="Features\Terminations\" />
+    <Folder Include="Features\ShiftSchedules\" />
+    <Folder Include="Features\Promotions\" />
+    <Folder Include="Features\PerformanceReviews\" />
+    <Folder Include="Features\Payrolls\" />
+    <Folder Include="Features\Professions\" />
   </ItemGroup>
 
 </Project>
