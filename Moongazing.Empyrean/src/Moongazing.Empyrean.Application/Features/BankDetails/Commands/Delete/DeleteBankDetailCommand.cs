@@ -9,12 +9,6 @@ using Moongazing.Kernel.Application.Pipelines.Logging;
 using Moongazing.Kernel.Application.Pipelines.Performance;
 using Moongazing.Kernel.Application.Pipelines.Transaction;
 using Moongazing.Kernel.Security.Constants;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Moongazing.Empyrean.Application.Features.BankDetails.Constants.BankDetailOperationClaims;
 namespace Moongazing.Empyrean.Application.Features.BankDetails.Commands.Delete;
 
