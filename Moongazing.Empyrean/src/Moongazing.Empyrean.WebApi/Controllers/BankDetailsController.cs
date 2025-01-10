@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moongazing.Empyrean.Application.Features.BankDetail.Commands.Update;
 using Moongazing.Empyrean.Application.Features.BankDetail.Queries.GetByEmployeeId;
 using Moongazing.Empyrean.Application.Features.BankDetail.Queries.GetById;
+using Moongazing.Empyrean.Application.Features.BankDetail.Queries.GetList;
 using Moongazing.Empyrean.Application.Features.BankDetails.Commands.Create;
 using Moongazing.Empyrean.Application.Features.BankDetails.Commands.Delete;
 using Moongazing.Empyrean.Application.Features.Users.Commands.Create;
@@ -57,6 +58,13 @@ public sealed class BankDetailsController : BaseController
     {
         GetBankDetailByIdQuery getBankDetailByIdQuery = new() { Id = bankDetailId };
         GetBankDetailByIdResponse result = await Sender.Send(getBankDetailByIdQuery).ConfigureAwait(false);
+        return Ok(result);
+    }
+    [HttpGet("getlist")]
+    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+    {
+        GetBankDetailListQuery getBankDetailListQuery = new() { PageRequest = pageRequest };
+        GetListResponse<GetBankDetailListResponse> result = await Sender.Send(getBankDetailListQuery).ConfigureAwait(false);
         return Ok(result);
     }
 }
