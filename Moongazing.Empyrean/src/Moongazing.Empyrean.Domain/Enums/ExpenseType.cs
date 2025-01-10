@@ -7,3 +7,15 @@ public enum ExpenseType
     Accommodation,
     Other
 }
+
+
+public enum LeaveType
+{
+    Annual,
+    Sick,
+    Maternity,
+    Paternity,
+    Bereavement,
+    Unpaid,
+    Other
+}

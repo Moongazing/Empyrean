@@ -33,7 +33,6 @@ public class BankDetailBusinessRules : BaseBusinessRules
         }
     }
 
-
     public async Task BankDetailsShouldBeExists(Guid bankDetailId)
     {
         var bankDetails = await bankDetailRepository.AnyAsync(predicate: e => e.Id == bankDetailId, withDeleted: false);

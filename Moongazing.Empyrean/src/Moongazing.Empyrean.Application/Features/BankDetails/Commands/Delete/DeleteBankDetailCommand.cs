@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Moongazing.Empyrean.Application.Features.BankDetails.Constants;
 using Moongazing.Empyrean.Application.Features.BankDetails.Rules;
 using Moongazing.Empyrean.Application.Repositories;
 using Moongazing.Empyrean.Domain.Entities;
@@ -18,7 +19,7 @@ ILoggableRequest, ISecuredRequest, ICacheRemoverRequest, ITransactionalRequest, 
     public Guid Id { get; set; } = default!;
     public string[] Roles => [Admin, Write, Add, GeneralOperationClaims.Write];
     public bool BypassCache { get; }
-    public string? CacheGroupKey => "BankDetails";
+    public string? CacheGroupKey => BankDetailMessages.SectionName;
     public string? CacheKey => null;
     public int Interval => 15;
 

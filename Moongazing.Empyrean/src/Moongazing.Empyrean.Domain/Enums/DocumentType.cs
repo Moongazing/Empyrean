@@ -20,5 +20,6 @@ public enum DocumentType
     MarriageCertificate,
     AcademicTranscript,
     CriminalRecord,
+    ExpenseReceipt,
     Other
 }
