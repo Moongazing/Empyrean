@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Moongazing.Empyrean.Application.Features.BankDetails.Commands.Create;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Create;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Delete;
 using Moongazing.Empyrean.WebApi.Controllers.Common;
