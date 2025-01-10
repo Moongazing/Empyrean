@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Features\BankDetail\Profiles\" />
-    <Folder Include="Features\BankDetail\Queries\GetList\" />
     <Folder Include="Features\BankDetail\Queries\GetListByDynamic\" />
     <Folder Include="Features\Employee\Commands\" />
     <Folder Include="Features\Employee\Resources\" />
