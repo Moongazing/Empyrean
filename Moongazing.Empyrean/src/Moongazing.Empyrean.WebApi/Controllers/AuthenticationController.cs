@@ -104,7 +104,7 @@ public sealed class AuthenticationController : BaseController
 
         await Sender.Send(enableEmailAuthenticatorCommand).ConfigureAwait(false);
 
-        return Ok("Email authenticator enabled successfully.");
+        return Ok();
     }
 
     [HttpGet("enable/otpauthenticator")]
@@ -125,7 +125,7 @@ public sealed class AuthenticationController : BaseController
     {
         await Sender.Send(verifyEmailAuthenticatorCommand).ConfigureAwait(false);
 
-        return Ok("Email authenticator verified successfully.");
+        return Ok();
     }
 
     [HttpPost("verify/otpauthenticator")]
@@ -139,7 +139,7 @@ public sealed class AuthenticationController : BaseController
 
         await Sender.Send(verifyOtpAuthenticatorCommand).ConfigureAwait(false);
 
-        return Ok("OTP authenticator verified successfully.");
+        return Ok();
     }
 
     private string GetRefreshTokenFromCookies() => Request.Cookies["refreshToken"]
