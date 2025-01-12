@@ -91,7 +91,6 @@
     <Folder Include="Features\LeaveRequests\Queries\GetById\" />
     <Folder Include="Features\LeaveRequests\Queries\GetByDateList\" />
     <Folder Include="Features\LeaveRequests\Queries\GetListByDynamic\" />
-    <Folder Include="Features\LeaveRequests\Queries\GetByLeaveTypeList\" />
     <Folder Include="Features\LeaveRequests\Resources\Locales\" />
     <Folder Include="Features\Payrolls\Commands\" />
     <Folder Include="Features\Payrolls\Constants\" />
