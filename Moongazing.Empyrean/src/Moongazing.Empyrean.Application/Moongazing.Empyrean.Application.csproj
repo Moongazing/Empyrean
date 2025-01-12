@@ -89,7 +89,6 @@
     <Folder Include="Features\ExpenseRecords\Rules\" />
     <Folder Include="Features\LeaveRequests\Profiles\" />
     <Folder Include="Features\LeaveRequests\Queries\GetById\" />
-    <Folder Include="Features\LeaveRequests\Queries\GetByEmployeeId\" />
     <Folder Include="Features\LeaveRequests\Queries\GetByDateList\" />
     <Folder Include="Features\LeaveRequests\Queries\GetList\" />
     <Folder Include="Features\LeaveRequests\Queries\GetListByDynamic\" />

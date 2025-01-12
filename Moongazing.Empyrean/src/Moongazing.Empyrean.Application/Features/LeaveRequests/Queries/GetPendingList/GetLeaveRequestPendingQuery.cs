@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Moongazing.Empyrean.Application.Features.BankDetails.Constants;
-using Moongazing.Empyrean.Application.Features.BankDetails.Queries.GetListByDynamic;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Constants;
+using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetByEmployeeId;
 using Moongazing.Empyrean.Application.Repositories;
 using Moongazing.Empyrean.Domain.Entities;
 using Moongazing.Kernel.Application.Pipelines.Authorization;
@@ -21,9 +20,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static Moongazing.Empyrean.Application.Features.LeaveRequests.Constants.LeaveRequestOperationClaims;
 
-namespace Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetTodayList;
+namespace Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetPendingList;
 
-public class GetLeaveRequestListByTodayQuery : IRequest<GetListResponse<GetLeaveRequestListByTodayResponse>>,
+public class GetLeaveRequestPendingListQuery : IRequest<GetListResponse<GetLeaveRequestPendingResponse>>,
      ILoggableRequest, ICachableRequest, ISecuredRequest, IIntervalRequest
 {
     public PageRequest PageRequest { get; set; } = default!;
@@ -34,35 +33,31 @@ public class GetLeaveRequestListByTodayQuery : IRequest<GetListResponse<GetLeave
     public TimeSpan? SlidingExpiration { get; }
     public int Interval => 15;
 
-
-    public class GetLeaveRequestListByTodayQueryHandler : IRequestHandler<GetLeaveRequestListByTodayQuery, GetListResponse<GetLeaveRequestListByTodayResponse>>
+    public class GetLeaveRequestPendingListQueryHandler : IRequestHandler<GetLeaveRequestPendingListQuery, GetListResponse<GetLeaveRequestPendingResponse>>
     {
-
         private readonly ILeaveRequestRepository leaveRequestRepository;
         private readonly IMapper mapper;
 
-        public GetLeaveRequestListByTodayQueryHandler(ILeaveRequestRepository leaveRequestRepository,
+        public GetLeaveRequestPendingListQueryHandler(ILeaveRequestRepository leaveRequestRepository,
                                                       IMapper mapper)
         {
             this.leaveRequestRepository = leaveRequestRepository;
             this.mapper = mapper;
         }
 
-        public async Task<GetListResponse<GetLeaveRequestListByTodayResponse>> Handle(GetLeaveRequestListByTodayQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetLeaveRequestPendingResponse>> Handle(GetLeaveRequestPendingListQuery request, CancellationToken cancellationToken)
         {
-            var today = DateTime.Today;
-
             IPagebale<LeaveRequestEntity> leaveRequestList = await leaveRequestRepository.GetListAsync(
-                predicate: x => x.StartDate.Date <= today.Date && x.EndDate.Date >= today.Date && x.IsApproved,
-                index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize,
-                include: x => x.Include(x => x.Employee),
-                cancellationToken: cancellationToken);
+              predicate: x => x.IsApproved == false,
+              index: request.PageRequest.PageIndex,
+              size: request.PageRequest.PageSize,
+              include: x => x.Include(x => x.Employee),
+              withDeleted: false,
+              cancellationToken: cancellationToken);
 
-            GetListResponse<GetLeaveRequestListByTodayResponse> response = mapper.Map<GetListResponse<GetLeaveRequestListByTodayResponse>>(leaveRequestList);
+            GetListResponse<GetLeaveRequestPendingResponse> response = mapper.Map<GetListResponse<GetLeaveRequestPendingResponse>>(leaveRequestList);
 
             return response;
         }
-
     }
 }
