@@ -4,6 +4,7 @@ using Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Create;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Delete;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Update;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetByEmployeeId;
+using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetList;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetPendingList;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetTodayList;
 using Moongazing.Empyrean.WebApi.Controllers.Common;
@@ -53,6 +54,13 @@ public sealed class LeaveRequestsController : BaseController
     {
         GetLeaveRequestPendingListQuery getPendingLeaveRequestListQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetLeaveRequestPendingResponse> result = await Sender.Send(getPendingLeaveRequestListQuery).ConfigureAwait(false);
+        return Ok(result);
+    }
+    [HttpGet("getlist")]
+    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+    {
+        GetLeaveRequestListQuery getLeaveRequestListQuery = new() { PageRequest = pageRequest };
+        GetListResponse<GetLeaveRequestListResponse> result = await Sender.Send(getLeaveRequestListQuery).ConfigureAwait(false);
         return Ok(result);
     }
 
