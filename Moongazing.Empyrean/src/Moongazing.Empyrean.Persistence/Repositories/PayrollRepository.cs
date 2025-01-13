@@ -17,6 +17,14 @@ public class PayrollRepository : EfRepositoryBase<PayrollEntity, Guid, BaseDbCon
     {
     }
 
+    public async Task<ICollection<PayrollEntity>> GetPayrollCurrentMonthAsync(Guid employeeId)
+    {
+        var startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        var endDate = startDate.AddMonths(1).AddDays(-1);
+        return await Query()
+            .Where(p => p.EmployeeId == employeeId && p.PayDate >= startDate && p.PayDate <= endDate)
+            .ToListAsync();
+    }
     public async Task<ICollection<PayrollEntity>> GetPayrollsByDateRangeAsync(Guid employeeId, DateTime startDate, DateTime endDate)
     {
         return await Query()
