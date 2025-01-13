@@ -4,9 +4,12 @@ using Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Create;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Delete;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Commands.Update;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetByEmployeeId;
+using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetById;
+using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetByLeaveTypeList;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetList;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetPendingList;
 using Moongazing.Empyrean.Application.Features.LeaveRequests.Queries.GetTodayList;
+using Moongazing.Empyrean.Domain.Enums;
 using Moongazing.Empyrean.WebApi.Controllers.Common;
 using Moongazing.Kernel.Application.Requests;
 using Moongazing.Kernel.Application.Responses;
@@ -61,6 +64,20 @@ public sealed class LeaveRequestsController : BaseController
     {
         GetLeaveRequestListQuery getLeaveRequestListQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetLeaveRequestListResponse> result = await Sender.Send(getLeaveRequestListQuery).ConfigureAwait(false);
+        return Ok(result);
+    }
+    [HttpGet("details/{leaveRequestId:uuid}")]
+    public async Task<IActionResult> GetDetails(Guid leaveRequestId)
+    {
+        GetLeaveRequestByIdQuery getLeaveRequestByIdQuery = new() { Id = leaveRequestId };
+        GetLeaveRequestByIdResponse result = await Sender.Send(getLeaveRequestByIdQuery).ConfigureAwait(false);
+        return Ok(result);
+    }
+    [HttpGet("getlist/{type}")]
+    public async Task<IActionResult> GetListByType([FromQuery] PageRequest pageRequest, LeaveType type)
+    {
+        GetLeaveRequestByTypeListQuery getLeaveRequestListByEmployeeIdQuery = new() { PageRequest = pageRequest, LeaveType = type };
+        GetListResponse<GetLeaveRequestByTypeListResponse> result = await Sender.Send(getLeaveRequestListByEmployeeIdQuery).ConfigureAwait(false);
         return Ok(result);
     }
 
